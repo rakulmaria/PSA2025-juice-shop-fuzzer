@@ -6,5 +6,6 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fuzzingbook>=1.2.2",
+    "ipykernel>=7.1.0",
     "pygraphviz>=1.14",
 ]
