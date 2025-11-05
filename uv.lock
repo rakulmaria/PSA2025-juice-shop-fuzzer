@@ -1527,10 +1527,14 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fuzzingbook" },
+    { name = "pygraphviz" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "fuzzingbook", specifier = ">=1.2.2" }]
+requires-dist = [
+    { name = "fuzzingbook", specifier = ">=1.2.2" },
+    { name = "pygraphviz", specifier = ">=1.14" },
+]
 
 [[package]]
 name = "ptyprocess"

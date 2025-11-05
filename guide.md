@@ -12,7 +12,7 @@ After installation, you should be able to sync the packages in the project
 
 ```bash
 uv sync
-````
+```
 
 ## Step 2: install graphviz
 
