@@ -2,12 +2,6 @@
 
 We use UV for package management and this guide should help you set the environment up.
 
-## Optional
-
-```bash
-uv pip install -r requirements.txt
-```
-
 ## Step 1: install uv [(link to installation guide)](https://docs.astral.sh/uv/getting-started/installation/)
 
 ```bash
