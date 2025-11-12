@@ -1,5 +1,9 @@
-from fuzzingbook import GUIFuzzer
+from fuzzingbook.GUIFuzzer import GUIRunner, fsm_diagram, GUIGrammarMiner, GUICoverageFuzzer
 from selenium import webdriver
+
+from JuicyGrammarMiner import JuicyGrammarMiner
+from JuicyRunner import JuicyRunner
+
 import shutil
 
 BROWSER = 'chrome'
@@ -44,18 +48,16 @@ def driver():
 def main():
     print("Hello from psa2025-juice-shop-fuzzer!")
 
-    url = "http://localhost:3000/"
+    url = "http://localhost:3000/#/login"
     gui_driver = driver()
-    gui_fuzzer = GUIFuzzer.GUICoverageFuzzer(gui_driver)
-    gui_runner = GUIFuzzer.GUIRunner(gui_driver)
-    
     gui_driver.get(url)
-    print(gui_driver.title)
-    
-    actions = gui_fuzzer.fuzz()
-    print(actions)
-    result, outcome = gui_runner.run(actions)
-    print(outcome)
+
+    gui_miner = JuicyGrammarMiner(gui_driver)
+    gui_fuzzer = GUICoverageFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=True)
+    gui_runner = JuicyRunner(gui_driver)
+
+    gui_fuzzer.explore_all(gui_runner)
+    print(fsm_diagram(gui_fuzzer.grammar))
 
 
 if __name__ == "__main__":
