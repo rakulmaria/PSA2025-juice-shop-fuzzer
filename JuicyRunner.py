@@ -9,7 +9,7 @@ class JuicyRunner(GUIRunner):
         Return a pair (`inp`, `outcome`)."""
 
         def fill(name, value):
-            #print("FILL " + name + " " + value)
+            # print("FILL " + name + " " + value)
             self.do_fill(html.unescape(name), html.unescape(value))
 
         def check(name, state):
