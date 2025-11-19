@@ -12,6 +12,18 @@ class JuicyRunner(GUIRunner):
         self.driver = driver
         self.has_error = False
 
+    def do_fill(self, name: str, value: str) -> None:
+        element = self.find_element(name)
+        element.clear()
+        element.send_keys(value)
+        WebDriverWait(self.driver, self.DELAY_AFTER_FILL)
+
+    def do_check(self, id: str, state: bool) -> None:
+        element = self.driver.find_element(By.ID, id) #By ID, not name!
+        if bool(state) != bool(element.is_selected()):
+            element.click()
+        WebDriverWait(self.driver, self.DELAY_AFTER_CHECK)
+
     def do_submit(self, id: str) -> None:
         element = self.driver.find_element(By.ID, id) #By ID, not name!
         element.click()
@@ -29,7 +41,10 @@ class JuicyRunner(GUIRunner):
 
         def check(name, state):
             #print("CHECK " + name)
-            self.do_check(html.unescape(name), state)
+            if (name == ''):
+                self.do_check('rememberMe', state) #OBS: Hard-coded id
+            else:
+                self.do_check(html.unescape(name), state)
 
         def submit(name):
             #print("SUBMIT ")
@@ -39,15 +54,11 @@ class JuicyRunner(GUIRunner):
                 self.do_submit(html.unescape(name))
 
             errors = self.driver.find_elements(By.CLASS_NAME, "error")
-            print(len(errors))    
     
             if (len(errors) > 0):
-                
                 if (errors[0].text != ACCEPTABLE_ERROR_MSG):
                     print(errors[0].text)
                     self.has_error = True
-                else:
-                    print("acceptable error")
 
         def click(name):
             #print("CLICK " + name)
