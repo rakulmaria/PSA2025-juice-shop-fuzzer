@@ -7,6 +7,15 @@
 
 ## Supervision
 
+### 19-11-25
+
+- Own baseline, no fancy heuristics
+- Then implement heuristics, like probabilities (the fancier the better)
+- Compare those two
+- Compare to ZAP and maybe BackREST
+- Ideally, more than just one type of vulnerability, not just SQL injection
+
+
 ### 12-11-25
 
 - No papers to compare, what to do?
