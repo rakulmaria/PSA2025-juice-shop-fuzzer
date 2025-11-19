@@ -7,7 +7,7 @@ from JuicyRunner import JuicyRunner
 import shutil
 
 BROWSER = 'chrome'
-HEADLESS = True
+HEADLESS = False
 
 def driver():
     if BROWSER == 'firefox':
@@ -37,7 +37,7 @@ def driver():
             options.add_argument("--headless=new")
         
         gui_driver = webdriver.Chrome(options=options)
-        gui_driver.set_window_size(700, 210 if HEADLESS else 340)
+        gui_driver.set_window_size(700, 210 if HEADLESS else 600)
 
     else:
         assert False, "Select 'firefox' or 'chrome' as browser"
@@ -57,7 +57,7 @@ def main():
     gui_runner = JuicyRunner(gui_driver)
 
     gui_fuzzer.explore_all(gui_runner)
-    print(fsm_diagram(gui_fuzzer.grammar))
+    #print(fsm_diagram(gui_fuzzer.grammar))
 
 
 if __name__ == "__main__":
