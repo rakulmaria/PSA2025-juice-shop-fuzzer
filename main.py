@@ -1,8 +1,9 @@
-from fuzzingbook.GUIFuzzer import GUIRunner, fsm_diagram, GUIGrammarMiner, GUICoverageFuzzer
+from fuzzingbook.GUIFuzzer import fsm_diagram
 from selenium import webdriver
 
 from JuicyGrammarMiner import JuicyGrammarMiner
 from JuicyRunner import JuicyRunner
+from JuicyFuzzer import JuicyFuzzer
 
 import shutil
 
@@ -53,7 +54,7 @@ def main():
     gui_driver.get(url)
 
     gui_miner = JuicyGrammarMiner(gui_driver)
-    gui_fuzzer = GUICoverageFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=True)
+    gui_fuzzer = JuicyFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=False)
     gui_runner = JuicyRunner(gui_driver)
 
     gui_fuzzer.explore_all(gui_runner)
