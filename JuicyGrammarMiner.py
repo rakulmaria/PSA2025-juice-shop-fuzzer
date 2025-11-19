@@ -30,7 +30,7 @@ BETTER_GUI_GRAMMAR: Grammar = ({
         "<special>": srange(". !"),
 
         #TODO: Fix this
-        "<email>": ["scarySINGLEQUOTE"],
+        "<email>": ["<string>@<string>"],
         "<letters>": ["<letter>", "<letters><letter>"],
 
         "<boolean>": ["True", "False"],
