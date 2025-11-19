@@ -31,7 +31,8 @@ BETTER_GUI_GRAMMAR: Grammar = ({
 
         "<special>": srange(". !"),
 
-        "<email>": ["<string>"],
+        #TODO: Fix this
+        "<email>": ["<string>@<string>"],
         "<letters>": ["<letter>", "<letters><letter>"],
 
         "<boolean>": ["True", "False"],
@@ -87,19 +88,15 @@ class JuicyGrammarMiner(GUIGrammarMiner):
         for elem in self.driver.find_elements(By.TAG_NAME, "input"):
             try:
                 input_type = elem.get_attribute("type")
-                input_name = elem.get_attribute("name") or elem.text # or elem.text: mac debugging
-                print("Detected input:", input_name, "type:", input_type)
+                input_name = elem.get_attribute("name") 
+            
                 if input_name is None:
                     input_name = elem.text
 
                 if input_type in ["checkbox", "radio"]:
                     actions.add("check('%s', <boolean>)" % html.escape(input_name))
                 elif input_type in ["text", "number", "email", "password"]:
-                    # fix email detection on macOS, where type="email" is reported as "text"
-                    if input_type == "text" and "email" in input_name:
-                        actions.add("fill('%s', '<%s>')" % (html.escape(input_name, False), html.escape("email", False)))
-                    else:
-                        actions.add("fill('%s', '<%s>')" % (html.escape(input_name), html.escape(input_type)))
+                    actions.add("fill('%s', '<%s>')" % (html.escape(input_name), html.escape(input_type)))
                 elif input_type in ["button", "submit"]:
                     actions.add("submit('%s')" % html.escape(input_name))
                 elif input_type in ["hidden"]:

@@ -1,13 +1,16 @@
-from fuzzingbook.GUIFuzzer import GUIRunner, fsm_diagram, GUIGrammarMiner, GUICoverageFuzzer
+from fuzzingbook.GUIFuzzer import fsm_diagram
 from selenium import webdriver
+from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException, NoSuchElementException
 
 from JuicyGrammarMiner import JuicyGrammarMiner
 from JuicyRunner import JuicyRunner
+from JuicyFuzzer import JuicyFuzzer
 
 import shutil
 
 BROWSER = 'chrome'
 HEADLESS = False
+ITERATIONS = 5
 
 def driver():
     if BROWSER == 'firefox':
@@ -16,16 +19,13 @@ def driver():
             "from https://github.com/mozilla/geckodriver/releases"
         options = webdriver.FirefoxOptions()
         if HEADLESS:
-            # See https://www.browserstack.com/guide/firefox-headless
             options.add_argument("--headless")
 
         # For firefox, set a higher resolution for our screenshots
         options.set_preference("layout.css.devPixelsPerPx", repr(1.4))
         gui_driver = webdriver.Firefox(options=options)
 
-        # We set the window size such that it fits our order form exactly;
-        # this is useful for not wasting too much space when taking screen shots.
-        gui_driver.set_window_size(700, 300)
+        gui_driver.set_window_size(1400, 800)
 
     elif BROWSER == 'chrome':
         assert shutil.which('chromedriver') is not None, \
@@ -33,11 +33,13 @@ def driver():
             "from https://chromedriver.chromium.org"
         options = webdriver.ChromeOptions()
         if HEADLESS:
-            # See https://www.selenium.dev/blog/2023/headless-is-going-away/
             options.add_argument("--headless=new")
-        
+        else:
+            options.add_experimental_option("detach", True) 
+
         gui_driver = webdriver.Chrome(options=options)
-        gui_driver.set_window_size(700, 210 if HEADLESS else 600)
+        gui_driver.set_window_size(1400, 800)
+        gui_driver.implicitly_wait(2)
 
     else:
         assert False, "Select 'firefox' or 'chrome' as browser"
@@ -53,10 +55,25 @@ def main():
     gui_driver.get(url)
 
     gui_miner = JuicyGrammarMiner(gui_driver)
-    gui_fuzzer = GUICoverageFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=True)
+    gui_fuzzer = JuicyFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=False)
     gui_runner = JuicyRunner(gui_driver)
 
     gui_fuzzer.explore_all(gui_runner)
+
+    for _ in range(ITERATIONS):
+        try:
+            symbol, outcome = gui_fuzzer.run(gui_runner)
+            print(outcome)
+        except ElementClickInterceptedException as e:
+            print("ElementClickInterceptedException")
+            pass
+        except ElementNotInteractableException as e:
+            print("ElementNotInteractableException")
+            pass
+        except NoSuchElementException as e:
+            print("NoSuchElementException")
+            pass
+
     #print(fsm_diagram(gui_fuzzer.grammar))
 
 
