@@ -34,8 +34,8 @@ def driver():
         options = webdriver.ChromeOptions()
         if HEADLESS:
             options.add_argument("--headless=new")
-        else:
-            options.add_experimental_option("detach", True) 
+        # else:
+        #     options.add_experimental_option("detach", True) 
 
         gui_driver = webdriver.Chrome(options=options)
         gui_driver.set_window_size(1400, 800)
