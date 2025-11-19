@@ -95,13 +95,12 @@ SQLI_GRAMMAR: Grammar = ({
         "<special>": srange(". !"),
         "<single-quote>": ["\\'"],
 
-        # improve email generation by enforcing a single-quote at the end
+        # enforce a SQLi payload in email generation
         "<email>": ["<string>@<string>.<string><sqli>"],
         "<letters>": ["<letter>", "<letters><letter>"],
 
         "<boolean>": ["True", "False"],
 
-        #random password
         "<password>": ["<string>"],
 
         "<hidden>": ["<string>"],
