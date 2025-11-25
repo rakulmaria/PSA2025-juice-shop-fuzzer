@@ -7,6 +7,18 @@
 
 ## Supervision
 
+### 25-11-25
+
+- ZAP and BooFuzz. ZAP is fine, BooFuzz is not. Crashing terminal instead of program
+  - Not a problem, we can use their results to compare with. Explain access issues to actual tool
+- Remember to send link to paper we compare to
+- SQL injection rules for grammar
+- Add coverage, if possible, to have metrics
+- Add a couple of different heuristics, compare them
+- But not more important than finding more vulnerabilities, better metric
+- Exam: Mostly project-based, but maybe conversation moves further in the course content
+
+
 ### 19-11-25
 
 - Own baseline, no fancy heuristics
