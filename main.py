@@ -10,7 +10,8 @@ import shutil
 
 BROWSER = 'chrome'
 HEADLESS = True
-ITERATIONS = 5
+ITERATIONS = 10
+LOG = False
 
 def driver():
     if BROWSER == 'firefox':
@@ -55,33 +56,43 @@ def main():
     gui_driver.get(url)
 
     gui_miner = JuicyGrammarMiner(gui_driver)
-    gui_fuzzer = JuicyFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=False)
-    gui_runner = JuicyRunner(gui_driver)
+    gui_fuzzer = JuicyFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=LOG)
+    gui_runner = JuicyRunner(gui_driver, log_gui_exploration=LOG)
 
     failed_runs = 0
     error_msgs = []
 
     try:
-        gui_fuzzer.explore_all(gui_runner)
+        try:
+            gui_fuzzer.explore_all(gui_runner)
+        except NoSuchElementException:
+            pass
 
         for i in range(ITERATIONS):
-            #print("---iteration " + str(i))
-            error_msg, result = gui_fuzzer.run(gui_runner)
+            if LOG:
+                print("---iteration " + str(i))
+            
+            try:
+                error_msg, result = gui_fuzzer.run(gui_runner)
+            except NoSuchElementException:
+                pass
+            
             if result != gui_runner.PASS:
-                #print(error_msg)
+                if LOG:
+                    print(error_msg)
                 failed_runs += 1
                 error_msgs.append(error_msg)
 
         print(f"{failed_runs} failed tests out of {ITERATIONS}\n{error_msgs}")
 
     except ElementClickInterceptedException:
-        print("ElementClickInterceptedException")
+        print("ElementClickInterceptedException " + gui_driver.current_url)
     except ElementNotInteractableException:
-        print("ElementNotInteractableException")
+        print("ElementNotInteractableException " + gui_driver.current_url)
     except NoSuchElementException:
-        print("NoSuchElementException")
+        print("NoSuchElementException " + gui_driver.current_url)
     except StaleElementReferenceException:
-        print("StaleElementException")
+        print("StaleElementException " + gui_driver.current_url)
 
     #print(fsm_diagram(gui_fuzzer.grammar))
 

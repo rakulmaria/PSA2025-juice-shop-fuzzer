@@ -96,7 +96,11 @@ SQLI_GRAMMAR: Grammar = ({
         "<single-quote>": ["\\'"],
 
         # enforce a SQLi payload in email generation
-        "<email>": ["<string>@<string>.<string><sqli>"],
+        "<email>": ["<string>@<string>.<string>", 
+                    ("<string><single-quote>", opts(prob=0.5)), 
+                    ("<string>@<string>.<string><sqli>", opts(prob=0.1)), 
+                    ("<sqli>", opts(prob=0.1))],
+
         "<letters>": ["<letter>", "<letters><letter>"],
 
         "<boolean>": ["True", "False"],
@@ -151,25 +155,53 @@ class JuicyGrammarMiner(GUIGrammarMiner):
 
         actions = set()
 
-        for elem in self.driver.find_elements(By.TAG_NAME, "input"):
+        form = self.driver.find_element(By.TAG_NAME, "app-login")
+
+        for elem in form.find_elements(By.TAG_NAME, "input"):
             try:
                 input_type = elem.get_attribute("type")
-                input_name = elem.get_attribute("name") 
+                input_name = elem.get_attribute("id") 
             
-                if input_name is None:
+                if input_name is None or input_name == '':
                     input_name = elem.text
 
-                if input_type in ["checkbox", "radio"]:
-                    actions.add("check('%s', <boolean>)" % html.escape(input_name))
-                elif input_type in ["text", "number", "email", "password"]:
-                    actions.add("fill('%s', '<%s>')" % (html.escape(input_name), html.escape(input_type)))
-                elif input_type in ["button", "submit"]:
-                    actions.add("submit('%s')" % html.escape(input_name))
-                elif input_type in ["hidden"]:
-                    pass
-                else:
-                    actions.add("fill('%s', <%s>)" % (html.escape(input_name), html.escape(input_type)))
+                if input_name != 'loginButtonGoogle' and input_name != "": 
+                    if input_type in ["checkbox", "radio"]:
+                        actions.add("check('%s', <boolean>)" % html.escape(input_name))
+                    elif input_type in ["text", "number", "email", "password"]:
+                        actions.add("fill('%s', '<%s>')" % (html.escape(input_name), html.escape(input_type)))
+                    elif input_type in ["button", "submit"]:
+                        actions.add("submit('%s')" % html.escape(input_name))
+                    elif input_type in ["hidden"]:
+                        pass
+                    else:
+                        actions.add("fill('%s', <%s>)" % (html.escape(input_name), html.escape(input_type)))
 
+            except StaleElementReferenceException:
+                pass
+
+        return actions
+    
+    def mine_button_element_actions(self) -> Set[str]:
+        """Determine all button actions on the current Web page"""
+
+        actions = set()
+
+        form = self.driver.find_element(By.TAG_NAME, "app-login")
+
+        for elem in form.find_elements(By.TAG_NAME, "button"):
+            try:
+                button_type = elem.get_attribute("type")
+                button_name = elem.get_attribute("id")
+
+                if button_name is None or button_name == '':
+                    button_name = elem.text
+
+                if button_name != 'loginButtonGoogle' and button_name != "":        
+                    if button_type == "submit":
+                        actions.add("submit('%s')" % html.escape(button_name))
+                    elif button_type != "reset":
+                        actions.add("click('%s')" % html.escape(button_name))
             except StaleElementReferenceException:
                 pass
 

@@ -8,44 +8,84 @@ from selenium.common.exceptions import ElementClickInterceptedException, Element
 ACCEPTABLE_ERROR_MSG = "Invalid email or password."
 
 class JuicyRunner(GUIRunner):
-    def __init__(self, driver) -> None:
+    def __init__(self, driver, log_gui_exploration=False) -> None:
         """Constructor. `driver` is a Selenium Web driver"""
         self.driver = driver
+        self.log = log_gui_exploration
 
     def do_fill(self, name: str, value: str) -> None:
-        element = self.find_element(name)
-        element.clear()
-        element.send_keys(value)
-        WebDriverWait(self.driver, self.DELAY_AFTER_FILL)
+        try:
+            element = self.find_element(name)
+            element.clear()
+            element.send_keys(value)
+            WebDriverWait(self.driver, self.DELAY_AFTER_FILL)
+        except ElementClickInterceptedException:
+            if self.log:
+                print("do_fill ElementClickInterceptedException " + self.driver.current_url)
+        except ElementNotInteractableException:
+            if self.log:
+                print("do_fill ElementNotInteractableException " + self.driver.current_url)
+        except NoSuchElementException:
+            if self.log:
+                print("do_fill NoSuchElementException " + self.driver.current_url)
+        except StaleElementReferenceException:
+            if self.log:
+                print("do_fill StaleElementReferenceException " + self.driver.current_url)
 
     def do_check(self, id: str, state: bool) -> None:
-        element = self.driver.find_element(By.ID, id) #By ID, not name!
-        if bool(state) != bool(element.is_selected()):
-            element.click()
-        WebDriverWait(self.driver, self.DELAY_AFTER_CHECK)
+        try:
+            element = self.driver.find_element(By.ID, id) #By ID, not name!
+            if bool(state) != bool(element.is_selected()):
+                element.click()
+            WebDriverWait(self.driver, self.DELAY_AFTER_CHECK)
+        except ElementClickInterceptedException:
+            if self.log:
+                print("do_check ElementClickInterceptedException " + self.driver.current_url)
+        except ElementNotInteractableException:
+            if self.log:
+                print("do_check ElementNotInteractableException " + self.driver.current_url)
+        except NoSuchElementException:
+            if self.log:
+                print("do_check NoSuchElementException " + self.driver.current_url)
+        except StaleElementReferenceException:
+            if self.log:
+                print("do_check StaleElementReferenceException " + self.driver.current_url)
 
     def do_submit(self, id: str) -> None:
         try:
-            element = self.driver.find_element(By.ID, id) #By ID, not name!¨¨
+            element = self.driver.find_element(By.ID, id)
             element.click()
             WebDriverWait(self.driver, self.DELAY_AFTER_SUBMIT)
         except ElementClickInterceptedException:
-            pass
-            #print("do_submit ElementClickInterceptedException " + self.driver.current_url)
+            if self.log:
+                print("do_submit ElementClickInterceptedException " + self.driver.current_url)
         except ElementNotInteractableException:
-            pass
-            #print("do_submit ElementNotInteractableException " + self.driver.current_url)
+            if self.log:
+                print("do_submit ElementNotInteractableException " + self.driver.current_url)
         except NoSuchElementException:
-            pass
-            #print("do_submit NoSuchElementException " + self.driver.current_url)
+            if self.log:
+                print("do_submit NoSuchElementException " + self.driver.current_url)
         except StaleElementReferenceException:
-            pass
-            #print("do_submit StaleElementException " + self.driver.current_url)
+            if self.log:
+                print("do_submit StaleElementReferenceException " + self.driver.current_url)
 
     def do_click(self, name: str) -> None:
-        element = self.find_element(name)
-        element.click()
-        WebDriverWait(self.driver, self.DELAY_AFTER_CLICK)
+        try:
+            element = self.find_element(name)
+            element.click()
+            WebDriverWait(self.driver, self.DELAY_AFTER_CLICK)
+        except ElementClickInterceptedException:
+            if self.log:
+                print("do_click ElementClickInterceptedException " + self.driver.current_url)
+        except ElementNotInteractableException:
+            if self.log:
+                print("do_click ElementNotInteractableException " + self.driver.current_url)
+        except NoSuchElementException:
+            if self.log:
+                print("do_click NoSuchElementException " + self.driver.current_url)
+        except StaleElementReferenceException:
+            if self.log:
+                print("do_click StaleElementReferenceException " + self.driver.current_url)
 
 
     def oracle(self) -> Tuple[str,str]:
@@ -66,28 +106,29 @@ class JuicyRunner(GUIRunner):
         Return a pair (`inp`, `outcome`)."""
 
         def fill(name, value):
-            #print("FILL " + name + " " + value)
-            if (name != '' and value != ''):
-                self.do_fill(html.unescape(name), html.unescape(value))
+            if self.log:
+                print("FILL " + name + " " + value)
+            
+            self.do_fill(html.unescape(name), html.unescape(value))
 
         def check(name, state):
-            #print("CHECK " + name)
-            if (name == ''):
-                self.do_check('rememberMe', state) #OBS: Hard-coded id
-            else:
-                self.do_check(html.unescape(name), state)
+            if self.log:
+                print("CHECK " + name)
+
+            self.do_check(html.unescape(name), state)
 
         def submit(name):
-            #print("SUBMIT ")
-            if (name == ''):
-                self.do_submit('loginButton') #OBS: Hard-coded id
-            else: 
+            if self.log:
+                print("SUBMIT " + name)
+
+            if 'login' in self.driver.current_url:
                 self.do_submit(html.unescape(name))        
 
         def click(name):
-            #print("CLICK " + name)
-            if (name != '') :
-                self.do_click(html.unescape(name))
+            if self.log:
+                print("CLICK " + name)
+            
+            self.do_click(html.unescape(name))
 
         exec(inp, {'__builtins__': {}},
                   {
