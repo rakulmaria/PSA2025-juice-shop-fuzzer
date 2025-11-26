@@ -1,6 +1,6 @@
 from fuzzingbook.GUIFuzzer import fsm_diagram
 from selenium import webdriver
-from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException, NoSuchElementException
+from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException, NoSuchElementException, StaleElementReferenceException
 
 from JuicyGrammarMiner import JuicyGrammarMiner
 from JuicyRunner import JuicyRunner
@@ -9,7 +9,7 @@ from JuicyFuzzer import JuicyFuzzer
 import shutil
 
 BROWSER = 'chrome'
-HEADLESS = False
+HEADLESS = True
 ITERATIONS = 5
 
 def driver():
@@ -38,7 +38,7 @@ def driver():
         #     options.add_experimental_option("detach", True) 
 
         gui_driver = webdriver.Chrome(options=options)
-        gui_driver.set_window_size(1400, 800)
+        gui_driver.set_window_size(1400, 700)
         gui_driver.implicitly_wait(2)
 
     else:
@@ -58,21 +58,30 @@ def main():
     gui_fuzzer = JuicyFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=False)
     gui_runner = JuicyRunner(gui_driver)
 
-    gui_fuzzer.explore_all(gui_runner)
+    failed_runs = 0
+    error_msgs = []
 
-    for _ in range(ITERATIONS):
-        try:
-            symbol, outcome = gui_fuzzer.run(gui_runner)
-            print(outcome)
-        except ElementClickInterceptedException as e:
-            print("ElementClickInterceptedException")
-            pass
-        except ElementNotInteractableException as e:
-            print("ElementNotInteractableException")
-            pass
-        except NoSuchElementException as e:
-            print("NoSuchElementException")
-            pass
+    try:
+        gui_fuzzer.explore_all(gui_runner)
+
+        for i in range(ITERATIONS):
+            #print("---iteration " + str(i))
+            error_msg, result = gui_fuzzer.run(gui_runner)
+            if result != gui_runner.PASS:
+                #print(error_msg)
+                failed_runs += 1
+                error_msgs.append(error_msg)
+
+        print(f"{failed_runs} failed tests out of {ITERATIONS}\n{error_msgs}")
+
+    except ElementClickInterceptedException:
+        print("ElementClickInterceptedException")
+    except ElementNotInteractableException:
+        print("ElementNotInteractableException")
+    except NoSuchElementException:
+        print("NoSuchElementException")
+    except StaleElementReferenceException:
+        print("StaleElementException")
 
     #print(fsm_diagram(gui_fuzzer.grammar))
 

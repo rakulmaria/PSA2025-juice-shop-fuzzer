@@ -1,11 +1,15 @@
 from fuzzingbook.GUIFuzzer import GUICoverageFuzzer, GUIRunner
-
-from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException, NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
 
 from typing import Tuple
 
 
 class JuicyFuzzer(GUICoverageFuzzer):
+    def restart(self) -> None:
+        self.driver.get(self.initial_url)
+        self.state = frozenset(self.miner.START_STATE)
+        WebDriverWait(self.driver, 5, 1).until(lambda x: "login" in self.driver.current_url)
+
     def run(self, runner: GUIRunner) -> Tuple[str, str]:  # type: ignore
         """Run the fuzzer on the given GUIRunner `runner`."""
         assert isinstance(runner, GUIRunner)
@@ -17,13 +21,13 @@ class JuicyFuzzer(GUICoverageFuzzer):
         if self.log_gui_exploration:
             print("Action", action.strip(), "->", self.state_symbol)
 
-        result, outcome = runner.run(action)
+        error_msg, result = runner.run(action)
 
         if self.state_symbol != self.miner.FINAL_STATE:
             self.update_state()
 
-        return self.state_symbol, outcome
-    
+        return error_msg, result
+
 
     def explore_all(self, runner: GUIRunner, max_actions=100) -> None:
         """Explore all states of the GUI, up to `max_actions` (default 100)."""
@@ -34,15 +38,9 @@ class JuicyFuzzer(GUICoverageFuzzer):
             actions += 1
             if self.log_gui_exploration:
                 print("Run #" + repr(actions))
-            try:
-                symbol, outcome = self.run(runner)
-                print(outcome)
-            except ElementClickInterceptedException:
-                print("ElementClickInterceptedException")
-                pass
-            except ElementNotInteractableException:
-                print("ElementNotInteractableException")
-                pass
-            except NoSuchElementException:
-                print("NoSuchElementException")
-                pass
+            
+            error_msg, result = self.run(runner)
+
+            if self.log_gui_exploration:
+                if result != runner.PASS:
+                    print(f"Found error during explore: {error_msg}")

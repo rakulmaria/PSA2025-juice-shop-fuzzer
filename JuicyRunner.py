@@ -3,6 +3,7 @@ from typing import Tuple
 import html
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException, NoSuchElementException, StaleElementReferenceException
 
 ACCEPTABLE_ERROR_MSG = "Invalid email or password."
 
@@ -10,7 +11,6 @@ class JuicyRunner(GUIRunner):
     def __init__(self, driver) -> None:
         """Constructor. `driver` is a Selenium Web driver"""
         self.driver = driver
-        self.has_error = False
 
     def do_fill(self, name: str, value: str) -> None:
         element = self.find_element(name)
@@ -25,10 +25,41 @@ class JuicyRunner(GUIRunner):
         WebDriverWait(self.driver, self.DELAY_AFTER_CHECK)
 
     def do_submit(self, id: str) -> None:
-        element = self.driver.find_element(By.ID, id) #By ID, not name!
-        element.click()
-        WebDriverWait(self.driver, self.DELAY_AFTER_SUBMIT)
+        try:
+            element = self.driver.find_element(By.ID, id) #By ID, not name!¨¨
+            element.click()
+            WebDriverWait(self.driver, self.DELAY_AFTER_SUBMIT)
+        except ElementClickInterceptedException:
+            pass
+            #print("do_submit ElementClickInterceptedException " + self.driver.current_url)
+        except ElementNotInteractableException:
+            pass
+            #print("do_submit ElementNotInteractableException " + self.driver.current_url)
+        except NoSuchElementException:
+            pass
+            #print("do_submit NoSuchElementException " + self.driver.current_url)
+        except StaleElementReferenceException:
+            pass
+            #print("do_submit StaleElementException " + self.driver.current_url)
 
+    def do_click(self, name: str) -> None:
+        element = self.find_element(name)
+        element.click()
+        WebDriverWait(self.driver, self.DELAY_AFTER_CLICK)
+
+
+    def oracle(self) -> Tuple[str,str]:
+        errors = self.driver.find_elements(By.CLASS_NAME, "error")
+    
+        if (len(errors) > 0):
+            if (errors[0].text != ACCEPTABLE_ERROR_MSG):
+                return errors[0].text, self.FAIL 
+
+        logged_in = not ("login" in self.driver.current_url)
+        if logged_in:
+            return "logged in", self.FAIL 
+
+        return "", self.PASS
 
     def run(self, inp: str) -> Tuple[str, str]:
         """Execute the action string `inp` on the current Web site.
@@ -51,19 +82,13 @@ class JuicyRunner(GUIRunner):
             if (name == ''):
                 self.do_submit('loginButton') #OBS: Hard-coded id
             else: 
-                self.do_submit(html.unescape(name))
-
-            errors = self.driver.find_elements(By.CLASS_NAME, "error")
-    
-            if (len(errors) > 0):
-                if (errors[0].text != ACCEPTABLE_ERROR_MSG):
-                    print(errors[0].text)
-                    self.has_error = True
+                self.do_submit(html.unescape(name))        
 
         def click(name):
             #print("CLICK " + name)
-            self.do_click(html.unescape(name))
-        
+            if (name != '') :
+                self.do_click(html.unescape(name))
+
         exec(inp, {'__builtins__': {}},
                   {
                       'fill': fill,
@@ -72,7 +97,4 @@ class JuicyRunner(GUIRunner):
                       'click': click,
                   })
 
-        if self.has_error:
-            return inp, self.FAIL
-        
-        return inp, self.PASS
+        return self.oracle() #assert if test has passed or failed
