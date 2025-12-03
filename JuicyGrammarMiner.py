@@ -1,7 +1,7 @@
 from fuzzingbook.GUIFuzzer import GUIGrammarMiner
 from fuzzingbook.Grammars import START_SYMBOL, Grammar, crange, srange, opts
 
-from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 from selenium.webdriver.common.by import By
 
 from typing import Set, FrozenSet
@@ -81,6 +81,10 @@ SQLI_GRAMMAR: Grammar = ({
         UNEXPLORED_STATE: [""],
         FINAL_STATE: [""],
 
+        "<XSS>": ["<left>iframe src=\"javascript:alert(<single-quote>xss<single-quote>)\"<right>"],
+        "<left>": ["<"],
+        "<right>": [">"],        
+
         "<text>": ["<string>"],
         "<string>": ["<character>", "<string><character>"],
         "<character>": 
@@ -150,6 +154,10 @@ class JuicyGrammarMiner(GUIGrammarMiner):
     #GUI_GRAMMAR = BETTER_GUI_GRAMMAR
     GUI_GRAMMAR = SQLI_GRAMMAR
 
+    def __init__(self, driver, XSS):
+        self.XSS = XSS
+        super().__init__(driver)
+
     def mine_input_element_actions(self) -> Set[str]:
         """Determine all input actions on the current Web page"""
 
@@ -207,8 +215,22 @@ class JuicyGrammarMiner(GUIGrammarMiner):
 
         return actions
     
+    def mine_search_field(self) -> Set[str]:
+        actions = set()
+
+        try:
+            #self.driver.find_element(By.ID, "searchQuery").click()
+            search_field = self.driver.find_element(By.ID, "mat-input-1")
+            actions.add("search('<XSS>')")
+            return actions
+        except NoSuchElementException:
+            return actions
+    
     def mine_state_actions(self) -> FrozenSet[str]:
         """Return a set of all possible actions on the current Web site.
         Can be overloaded in subclasses."""
+        if (self.XSS):
+            return frozenset(self.mine_search_field())    
+        
         return frozenset(self.mine_input_element_actions()
                          | self.mine_button_element_actions()) #TODO links are removed for now

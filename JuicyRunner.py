@@ -3,7 +3,9 @@ from typing import Tuple
 import html
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException, NoSuchElementException, StaleElementReferenceException
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException, NoSuchElementException, StaleElementReferenceException, NoAlertPresentException, UnexpectedAlertPresentException, TimeoutException
+from selenium.webdriver.support import expected_conditions as EC
 
 ACCEPTABLE_ERROR_MSG = "Invalid email or password."
 
@@ -87,8 +89,26 @@ class JuicyRunner(GUIRunner):
             if self.log:
                 print("do_click StaleElementReferenceException " + self.driver.current_url)
 
+    def do_search(self, input: str):
+        try:
+            element = self.driver.find_element(By.ID, "mat-input-1")
+            element.send_keys(input)
+            element.send_keys(Keys.ENTER)
+            WebDriverWait(self.driver, self.DELAY_AFTER_FILL)
+        except ElementNotInteractableException:
+            self.driver.find_element(By.ID, "searchQuery").click()
+            self.do_search(input)
 
     def oracle(self) -> Tuple[str,str]:
+        try:
+            WebDriverWait(self.driver, timeout=2).until(EC.alert_is_present())
+            alert = self.driver.switch_to.alert
+            alert.accept()
+            WebDriverWait(self.driver, timeout=5, poll_frequency=1).until_not(EC.alert_is_present())
+            return "XSS", self.FAIL
+        except (TimeoutException, NoAlertPresentException):
+            pass
+
         errors = self.driver.find_elements(By.CLASS_NAME, "error")
     
         if (len(errors) > 0):
@@ -130,12 +150,27 @@ class JuicyRunner(GUIRunner):
             
             self.do_click(html.unescape(name))
 
-        exec(inp.split("submit('loginButton')")[0]+"submit('loginButton')", {'__builtins__': {}}, #TODO: fix action instead of this hack
+        def search(input):
+            if self.log:
+                print("SEARCH " + input)
+            
+            self.do_search(input)
+
+        #TODO: fix action instead of this hack
+        if "submit('loginButton')" in inp:
+            input = inp.split("submit('loginButton')")[0]+"submit('loginButton')"
+        elif "search('<iframe" in inp:
+            input = "search('<iframe src=\"javascript:alert(\\'xss\\')\">')"
+        else:
+            input = inp
+
+        exec(input, {'__builtins__': {}},
                   {
                       'fill': fill,
                       'check': check,
                       'submit': submit,
                       'click': click,
+                      'search': search,
                   })
 
         return self.oracle() #assert if test has passed or failed

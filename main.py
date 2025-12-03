@@ -9,9 +9,10 @@ from JuicyFuzzer import JuicyFuzzer
 import shutil
 
 BROWSER = 'chrome'
-HEADLESS = True
-ITERATIONS = 10
-LOG = False
+HEADLESS = False
+ITERATIONS = 5
+LOG = True
+XSS = False
 
 def driver():
     if BROWSER == 'firefox':
@@ -55,7 +56,7 @@ def main():
     gui_driver = driver()
     gui_driver.get(url)
 
-    gui_miner = JuicyGrammarMiner(gui_driver)
+    gui_miner = JuicyGrammarMiner(gui_driver, XSS)
     gui_fuzzer = JuicyFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=LOG)
     gui_runner = JuicyRunner(gui_driver, log_gui_exploration=LOG)
 
@@ -75,7 +76,7 @@ def main():
             try:
                 error_msg, result = gui_fuzzer.run(gui_runner)
             except NoSuchElementException:
-                pass
+                error_msg, result = "NoSuchElementException", gui_runner.FAIL
             
             if result != gui_runner.PASS:
                 if LOG:

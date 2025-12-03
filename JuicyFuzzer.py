@@ -1,5 +1,6 @@
 from fuzzingbook.GUIFuzzer import GUICoverageFuzzer, GUIRunner
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 
 from typing import Tuple
 
@@ -7,6 +8,7 @@ from typing import Tuple
 class JuicyFuzzer(GUICoverageFuzzer):
     def restart(self) -> None:
         self.driver.get(self.initial_url)
+        self.driver.find_element(By.ID, "searchQuery").click()
         self.state = frozenset(self.miner.START_STATE)
         WebDriverWait(self.driver, 5, 1).until(lambda x: "login" in self.driver.current_url)
 
