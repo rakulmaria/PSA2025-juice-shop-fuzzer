@@ -130,7 +130,7 @@ class JuicyRunner(GUIRunner):
             
             self.do_click(html.unescape(name))
 
-        exec(inp, {'__builtins__': {}},
+        exec(inp.split("submit('loginButton')")[0]+"submit('loginButton')", {'__builtins__': {}}, #TODO: fix action instead of this hack
                   {
                       'fill': fill,
                       'check': check,
