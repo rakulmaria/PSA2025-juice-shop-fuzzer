@@ -10,7 +10,7 @@ import shutil
 
 BROWSER = 'chrome'
 HEADLESS = False
-ITERATIONS = 5
+ITERATIONS = 10
 LOG = True
 XSS = False
 

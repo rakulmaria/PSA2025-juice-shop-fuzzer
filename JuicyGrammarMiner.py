@@ -109,12 +109,12 @@ SQLI_GRAMMAR: Grammar = ({
 
         
         "<email>": ["<string>@<string>.<string>",
-                    ("<string>@<string>.<string><sqli>", opts(prob=0.6))], # enforce a SQLi payload in email generation 60% of the time
+                    ("<string>@<string>.<string><sqli>", opts(prob=0.7))], # enforce a SQLi payload in email generation 60% of the time
 
-        "<sqli>": [("<tautologies>", opts(prob=0.1)),
-                    ("<union>", opts(prob=0.1)), 
-                    ("<piggy-backed>", opts(prob=0.1)), 
-                    ("<illegal>", opts(prob=0.1))],
+        "<sqli>": [("<tautologies>", opts(prob=0.3)),
+                    ("<union>", opts(prob=0.2)), 
+                    ("<piggy-backed>", opts(prob=0.2)), 
+                    ("<illegal>", opts(prob=0.3))],
         
         "<tautologies>": [
             "\\' OR \\'1\\'=\\'1",
