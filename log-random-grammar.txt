@@ -1,0 +1,179 @@
+--LOG--
+Run #1
+Action
+check('rememberMe-input', True)
+fill('email', 'Zx.@7')
+fill('password', 'HA')
+submit('loginButton')
+->
+<state-1>
+CHECK rememberMe-input
+FILL email Zx.@7
+FILL password HA
+SUBMIT loginButton
+---iteration 0
+Action
+check('rememberMe-input', False)
+fill('email', 'owJ@r')
+fill('password', 'X')
+submit('loginButton')
+->
+<end>
+CHECK rememberMe-input
+FILL email owJ@r
+FILL password X
+SUBMIT loginButton
+---iteration 1
+Action
+check('rememberMe-input', True)
+fill('email', 'g@QI')
+fill('password', 'a')
+submit('loginButton')
+check('rememberMe-input', True)
+fill('email', 'M@TE')
+fill('password', 't')
+submit('loginButton')
+check('rememberMe-input', False)
+fill('email', 'O@z')
+fill('password', 'W')
+submit('loginButton')
+check('rememberMe-input', True)
+fill('email', 'l@V')
+fill('password', 'q')
+submit('loginButton')
+->
+<end>
+CHECK rememberMe-input
+FILL email g@QI
+FILL password a
+SUBMIT loginButton
+---iteration 2
+Action
+check('rememberMe-input', True)
+fill('email', 'L@D')
+fill('password', 'vUi')
+submit('loginButton')
+check('rememberMe-input', False)
+fill('email', 'c@k')
+fill('password', 'C')
+submit('loginButton')
+->
+<end>
+CHECK rememberMe-input
+FILL email L@D
+FILL password vUi
+SUBMIT loginButton
+---iteration 3
+Action
+check('rememberMe-input', True)
+fill('email', 'B@uj')
+fill('password', 'he')
+submit('loginButton')
+check('rememberMe-input', False)
+fill('email', 'S@K')
+fill('password', 'Y')
+submit('loginButton')
+->
+<end>
+CHECK rememberMe-input
+FILL email B@uj
+FILL password he
+SUBMIT loginButton
+---iteration 4
+Action
+check('rememberMe-input', True)
+fill('email', 'N@m')
+fill('password', 'pn')
+submit('loginButton')
+check('rememberMe-input', True)
+fill('email', '5@d')
+fill('password', '8')
+submit('loginButton')
+check('rememberMe-input', False)
+fill('email', 's@4')
+fill('password', 'P')
+submit('loginButton')
+->
+<end>
+CHECK rememberMe-input
+FILL email N@m
+FILL password pn
+SUBMIT loginButton
+---iteration 5
+Action
+check('rememberMe-input', True)
+fill('email', '1@b')
+fill('password', '0')
+submit('loginButton')
+check('rememberMe-input', False)
+fill('email', 'R@f')
+fill('password', 'F')
+submit('loginButton')
+check('rememberMe-input', False)
+fill('email', '9@2')
+fill('password', '6')
+submit('loginButton')
+->
+<end>
+CHECK rememberMe-input
+FILL email 1@b
+FILL password 0
+SUBMIT loginButton
+---iteration 6
+Action
+check('rememberMe-input', False)
+fill('email', 'y@83')
+fill('password', 'y G')
+submit('loginButton')
+check('rememberMe-input', True)
+fill('email', '3@9m')
+fill('password', '!')
+submit('loginButton')
+check('rememberMe-input', True)
+fill('email', '2@.')
+fill('password', '5')
+submit('loginButton')
+->
+<end>
+CHECK rememberMe-input
+FILL email y@83
+FILL password y G
+SUBMIT loginButton
+---iteration 7
+--BREAKING--
+expanded whole grammer at: 7 iterations out of 10.
+Total errors found: 0
+Action
+check('rememberMe-input', False)
+fill('email', '2 @0')
+fill('password', '.')
+submit('loginButton')
+->
+<end>
+CHECK rememberMe-input
+FILL email 2 @0
+FILL password .
+SUBMIT loginButton
+---iteration 8
+--BREAKING--
+expanded whole grammer at: 8 iterations out of 10.
+Total errors found: 0
+Action
+
+->
+<end>
+---iteration 9
+--BREAKING--
+expanded whole grammer at: 9 iterations out of 10.
+Total errors found: 0
+Action
+
+->
+<end>
+
+--RESULTS--
+0 failed tests out of 10
+[]
+elapsed time: 24.528470039367676 ms
+time after exploration: 21.496299028396606 ms
+average per iteration: 2.149629902839661 ms
