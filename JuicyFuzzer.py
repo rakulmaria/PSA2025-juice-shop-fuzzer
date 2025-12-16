@@ -6,8 +6,7 @@ from typing import Tuple
 
 
 class JuicyFuzzer(GUICoverageFuzzer):
-    def __init__(self, log_fun, gui_driver, miner, log_gui_exploration=False) :
-        self.log_fun = log_fun
+    def __init__(self, gui_driver, miner, log_gui_exploration=False) :
         GUICoverageFuzzer.__init__(self, gui_driver, miner=miner, log_gui_exploration=log_gui_exploration)
 
     def restart(self) -> None:
@@ -25,7 +24,7 @@ class JuicyFuzzer(GUICoverageFuzzer):
         self.state_symbol = self.fsm_last_state_symbol(self.derivation_tree)
 
         if self.log_gui_exploration:
-            self.log_fun("Action", action.strip(), "->", self.state_symbol)
+            print("Action", action.strip(), "->", self.state_symbol)
 
         error_msg, result = runner.run(action)
 
@@ -43,10 +42,10 @@ class JuicyFuzzer(GUICoverageFuzzer):
                actions < max_actions):
             actions += 1
             if self.log_gui_exploration:
-                self.log_fun("Run #" + repr(actions))
+                print("Run #" + repr(actions))
             
             error_msg, result = self.run(runner)
 
             if self.log_gui_exploration:
                 if result != runner.PASS:
-                    self.log_fun(f"Found error during explore: {error_msg}")
+                    print(f"Found error during explore: {error_msg}")
