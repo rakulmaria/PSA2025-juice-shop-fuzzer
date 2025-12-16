@@ -31,50 +31,15 @@ BETTER_GUI_GRAMMAR: Grammar = ({
 
         "<special>": srange(". !"),
 
-        #TODO: Fix this
         "<email>": ["<string>@<string>"],
         "<letters>": ["<letter>", "<letters><letter>"],
 
         "<boolean>": ["True", "False"],
 
-        #random password
         "<password>": ["<string>"],
 
         "<hidden>": ["<string>"],
     })
-
-
-PROBALISTIC_GUI_GRAMMAR: Grammar = ({
-        START_SYMBOL: [START_STATE],
-        UNEXPLORED_STATE: [""],
-        FINAL_STATE: [""],
-
-        "<text>": ["<string>"],
-        "<string>": ["<character>", "<string><character>"],
-        "<character>": 
-            ["<letter>", "<digit>", "<special>"], 
-
-        "<letter>": crange('a', 'z') + crange('A', 'Z'),
-
-        "<number>": ["<digits>"],
-        "<digits>": ["<digit>", "<digits><digit>"],
-        "<digit>": crange('0', '9'),
-
-        "<special>": srange(". !"),
-        "<single-quote>": ["\\'"],
-
-        # improve email generation by enforcing a single-quote at the end
-        "<email>": ["<string>@<string>.<string><single-quote>"],
-        "<letters>": ["<letter>", "<letters><letter>"],
-
-        "<boolean>": ["True", "False"],
-
-        #random password
-        "<password>": ["<string>"],
-
-        "<hidden>": ["<string>"],
-    })
-
 
 SQLI_GRAMMAR: Grammar = ({
         START_SYMBOL: [START_STATE],
@@ -82,7 +47,7 @@ SQLI_GRAMMAR: Grammar = ({
         FINAL_STATE: [""],
 
         "<XSS>": ["<left>iframe src=\"javascript:alert(<single-quote>xss<single-quote>)\"<right>",
-                  "<left>iframe width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/771984076&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true\"\<right>"],
+                  "<left>iframe width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/771984076&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true\"<right>"],
         "<left>": ["<"],
         "<right>": [">"],        
 
@@ -109,8 +74,8 @@ SQLI_GRAMMAR: Grammar = ({
         "<hidden>": ["<string>"],
 
         
-        "<email>": ["<string>@<string>.<string>",
-                    ("<string>@<string>.<string><sqli>", opts(prob=1.0))], # enforce a SQLi payload in email generation 60% of the time
+        "<email>": [#"<string>@<string>.<string>",
+                    "<string>@<string>.<string><sqli>"], # enforce a SQLi payload in email generation 60% of the time
 
         "<sqli>": [("<tautologies>", opts(prob=0.3)),
                     ("<union>", opts(prob=0.2)), 
@@ -283,7 +248,7 @@ SQLI_GRAMMAR: Grammar = ({
 
 
 class JuicyGrammarMiner(GUIGrammarMiner):
-    #GUI_GRAMMAR = BETTER_GUI_GRAMMAR
+    # GUI_GRAMMAR = BETTER_GUI_GRAMMAR
     GUI_GRAMMAR = SQLI_GRAMMAR
 
     def __init__(self, driver, XSS):
