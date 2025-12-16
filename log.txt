@@ -1,0 +1,8 @@
+--LOG--
+
+--RESULTS--
+6 failed tests out of 10
+['[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+elapsed time: 37.018357276916504 ms
+time after exploration: 27.403443098068237 ms
+average per iteration: 2.7403443098068236 ms

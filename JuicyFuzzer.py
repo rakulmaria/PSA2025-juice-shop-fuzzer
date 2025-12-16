@@ -6,6 +6,10 @@ from typing import Tuple
 
 
 class JuicyFuzzer(GUICoverageFuzzer):
+    def __init__(self, log_fun, gui_driver, miner, log_gui_exploration=False) :
+        self.log_fun = log_fun
+        GUICoverageFuzzer.__init__(self, gui_driver, miner=miner, log_gui_exploration=log_gui_exploration)
+
     def restart(self) -> None:
         self.driver.get(self.initial_url)
         self.driver.find_element(By.ID, "searchQuery").click()
@@ -21,7 +25,7 @@ class JuicyFuzzer(GUICoverageFuzzer):
         self.state_symbol = self.fsm_last_state_symbol(self.derivation_tree)
 
         if self.log_gui_exploration:
-            print("Action", action.strip(), "->", self.state_symbol)
+            self.log_fun("Action", action.strip(), "->", self.state_symbol)
 
         error_msg, result = runner.run(action)
 
@@ -39,10 +43,10 @@ class JuicyFuzzer(GUICoverageFuzzer):
                actions < max_actions):
             actions += 1
             if self.log_gui_exploration:
-                print("Run #" + repr(actions))
+                self.log_fun("Run #" + repr(actions))
             
             error_msg, result = self.run(runner)
 
             if self.log_gui_exploration:
                 if result != runner.PASS:
-                    print(f"Found error during explore: {error_msg}")
+                    self.log_fun(f"Found error during explore: {error_msg}")

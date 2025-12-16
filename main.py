@@ -8,6 +8,7 @@ from JuicyFuzzer import JuicyFuzzer
 import pprint
 
 import shutil
+import time
 
 BROWSER = 'chrome'
 HEADLESS = True
@@ -50,16 +51,27 @@ def driver():
     return gui_driver
     
 
+FILENAME = "log.txt"
+
+def log(*args):
+    with open(FILENAME, "a") as f:
+        for text in args:
+            f.write(text + "\n")
+
 def main():
     print("Hello from psa2025-juice-shop-fuzzer!")
+    start = time.time()
+
+    with open(FILENAME, "w") as f:
+        f.write("--LOG--\n")
 
     url = "http://localhost:3000/#/login"
     gui_driver = driver()
     gui_driver.get(url)
 
     gui_miner = JuicyGrammarMiner(gui_driver, XSS)
-    gui_fuzzer = JuicyFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=LOG)
-    gui_runner = JuicyRunner(gui_driver, log_gui_exploration=LOG)
+    gui_fuzzer = JuicyFuzzer(log, gui_driver, miner=gui_miner, log_gui_exploration=LOG)
+    gui_runner = JuicyRunner(log, gui_driver, log_gui_exploration=LOG)
 
     failed_runs = 0
     error_msgs = []
@@ -72,7 +84,10 @@ def main():
         
         print("----- before iterations -------")
         # pprint.pprint(gui_fuzzer.missing_expansion_coverage())
+        pprint.print(gui_fuzzer.covered_expansions)
         fsm_diagram(gui_fuzzer.grammar)
+
+        mid = time.time()
 
         for i in range(ITERATIONS):
             if LOG:
@@ -92,16 +107,18 @@ def main():
             
             if result != gui_runner.PASS:
                 if LOG:
-                    print(error_msg)
+                    log(error_msg)
                 failed_runs += 1
                 error_msgs.append(error_msg)
 
-
+    
         print("----- after iterations -------")
-
+        pprint.pprint(gui_fuzzer.missing_expansion_coverage())
         fsm_diagram(gui_fuzzer.grammar)
 
-        print(f"{failed_runs} failed tests out of {ITERATIONS}\n{error_msgs}")
+        end = time.time()
+        log("\n--RESULTS--",f"{failed_runs} failed tests out of {ITERATIONS}\n{error_msgs}")
+        log(f"elapsed time: {end-start} ms", f"time after exploration: {end-mid} ms", f"average per iteration: {(end-mid)/ITERATIONS} ms")
 
     except ElementClickInterceptedException:
         print("ElementClickInterceptedException " + gui_driver.current_url)
