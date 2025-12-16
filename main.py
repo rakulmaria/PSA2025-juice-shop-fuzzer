@@ -7,12 +7,13 @@ from JuicyRunner import JuicyRunner
 from JuicyFuzzer import JuicyFuzzer
 
 import shutil
+import time
 
 BROWSER = 'chrome'
-HEADLESS = False
+HEADLESS = True
 ITERATIONS = 10
-LOG = True
-XSS = True
+LOG = False
+XSS = False
 
 def driver():
     if BROWSER == 'firefox':
@@ -58,6 +59,7 @@ def log(*args):
 
 def main():
     print("Hello from psa2025-juice-shop-fuzzer!")
+    start = time.time()
 
     with open(FILENAME, "w") as f:
         f.write("--LOG--\n")
@@ -78,6 +80,8 @@ def main():
             gui_fuzzer.explore_all(gui_runner)
         except NoSuchElementException:
             pass
+        
+        mid = time.time()
 
         for i in range(ITERATIONS):
             if LOG:
@@ -94,7 +98,9 @@ def main():
                 failed_runs += 1
                 error_msgs.append(error_msg)
 
-        log(f"{failed_runs} failed tests out of {ITERATIONS}\n{error_msgs}")
+        end = time.time()
+        log("\n--RESULTS--",f"{failed_runs} failed tests out of {ITERATIONS}\n{error_msgs}")
+        log(f"elapsed time: {end-start} ms", f"time after exploration: {end-mid} ms", f"average per iteration: {(end-mid)/ITERATIONS} ms")
 
     except ElementClickInterceptedException:
         print("ElementClickInterceptedException " + gui_driver.current_url)
