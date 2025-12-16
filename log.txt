@@ -1,0 +1,77 @@
+--LOG--
+Run #1
+Action
+search('<iframe src="javascript:alert(\'xss\')">')
+->
+<state-1>
+SEARCH <iframe src="javascript:alert('xss')">
+Found error during explore: XSS
+---iteration 0
+Action
+search('<iframe src="javascript:alert(\'xss\')">')
+->
+<end>
+SEARCH <iframe src="javascript:alert('xss')">
+XSS
+---iteration 1
+Action
+search('<iframe src="javascript:alert(\'xss\')">')
+search('<iframe src="javascript:alert(\'xss\')">')
+->
+<end>
+SEARCH <iframe src="javascript:alert('xss')">
+XSS
+---iteration 2
+Action
+search('<iframe src="javascript:alert(\'xss\')">')
+search('<iframe src="javascript:alert(\'xss\')">')
+search('<iframe src="javascript:alert(\'xss\')">')
+search('<iframe src="javascript:alert(\'xss\')">')
+->
+<end>
+SEARCH <iframe src="javascript:alert('xss')">
+XSS
+---iteration 3
+Action
+
+->
+<end>
+---iteration 4
+Action
+search('<iframe src="javascript:alert(\'xss\')">')
+search('<iframe src="javascript:alert(\'xss\')">')
+->
+<end>
+SEARCH <iframe src="javascript:alert('xss')">
+XSS
+---iteration 5
+Action
+search('<iframe src="javascript:alert(\'xss\')">')
+->
+<end>
+SEARCH <iframe src="javascript:alert('xss')">
+XSS
+---iteration 6
+Action
+
+->
+<end>
+---iteration 7
+Action
+search('<iframe src="javascript:alert(\'xss\')">')
+->
+<end>
+SEARCH <iframe src="javascript:alert('xss')">
+XSS
+---iteration 8
+Action
+
+->
+<end>
+---iteration 9
+Action
+
+->
+<end>
+6 failed tests out of 10
+['XSS', 'XSS', 'XSS', 'XSS', 'XSS', 'XSS']

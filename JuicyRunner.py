@@ -10,10 +10,11 @@ from selenium.webdriver.support import expected_conditions as EC
 ACCEPTABLE_ERROR_MSG = "Invalid email or password."
 
 class JuicyRunner(GUIRunner):
-    def __init__(self, driver, log_gui_exploration=False) -> None:
+    def __init__(self, log_fun, driver, log_gui_exploration=False) -> None:
         """Constructor. `driver` is a Selenium Web driver"""
         self.driver = driver
         self.log = log_gui_exploration
+        self.log_fun = log_fun
 
     def do_fill(self, name: str, value: str) -> None:
         try:
@@ -23,16 +24,16 @@ class JuicyRunner(GUIRunner):
             WebDriverWait(self.driver, self.DELAY_AFTER_FILL)
         except ElementClickInterceptedException:
             if self.log:
-                print("do_fill ElementClickInterceptedException " + self.driver.current_url)
+                self.log_fun("do_fill ElementClickInterceptedException " + self.driver.current_url)
         except ElementNotInteractableException:
             if self.log:
-                print("do_fill ElementNotInteractableException " + self.driver.current_url)
+                self.log_fun("do_fill ElementNotInteractableException " + self.driver.current_url)
         except NoSuchElementException:
             if self.log:
-                print("do_fill NoSuchElementException " + self.driver.current_url)
+                self.log_fun("do_fill NoSuchElementException " + self.driver.current_url)
         except StaleElementReferenceException:
             if self.log:
-                print("do_fill StaleElementReferenceException " + self.driver.current_url)
+                self.log_fun("do_fill StaleElementReferenceException " + self.driver.current_url)
 
     def do_check(self, id: str, state: bool) -> None:
         try:
@@ -42,16 +43,16 @@ class JuicyRunner(GUIRunner):
             WebDriverWait(self.driver, self.DELAY_AFTER_CHECK)
         except ElementClickInterceptedException:
             if self.log:
-                print("do_check ElementClickInterceptedException " + self.driver.current_url)
+                self.log_fun("do_check ElementClickInterceptedException " + self.driver.current_url)
         except ElementNotInteractableException:
             if self.log:
-                print("do_check ElementNotInteractableException " + self.driver.current_url)
+                self.log_fun("do_check ElementNotInteractableException " + self.driver.current_url)
         except NoSuchElementException:
             if self.log:
-                print("do_check NoSuchElementException " + self.driver.current_url)
+                self.log_fun("do_check NoSuchElementException " + self.driver.current_url)
         except StaleElementReferenceException:
             if self.log:
-                print("do_check StaleElementReferenceException " + self.driver.current_url)
+                self.log_fun("do_check StaleElementReferenceException " + self.driver.current_url)
 
     def do_submit(self, id: str) -> None:
         try:
@@ -60,16 +61,16 @@ class JuicyRunner(GUIRunner):
             WebDriverWait(self.driver, self.DELAY_AFTER_SUBMIT)
         except ElementClickInterceptedException:
             if self.log:
-                print("do_submit ElementClickInterceptedException " + self.driver.current_url)
+                self.log_fun("do_submit ElementClickInterceptedException " + self.driver.current_url)
         except ElementNotInteractableException:
             if self.log:
-                print("do_submit ElementNotInteractableException " + self.driver.current_url)
+                self.log_fun("do_submit ElementNotInteractableException " + self.driver.current_url)
         except NoSuchElementException:
             if self.log:
-                print("do_submit NoSuchElementException " + self.driver.current_url)
+                self.log_fun("do_submit NoSuchElementException " + self.driver.current_url)
         except StaleElementReferenceException:
             if self.log:
-                print("do_submit StaleElementReferenceException " + self.driver.current_url)
+                self.log_fun("do_submit StaleElementReferenceException " + self.driver.current_url)
 
     def do_click(self, name: str) -> None:
         try:
@@ -78,16 +79,16 @@ class JuicyRunner(GUIRunner):
             WebDriverWait(self.driver, self.DELAY_AFTER_CLICK)
         except ElementClickInterceptedException:
             if self.log:
-                print("do_click ElementClickInterceptedException " + self.driver.current_url)
+                self.log_fun("do_click ElementClickInterceptedException " + self.driver.current_url)
         except ElementNotInteractableException:
             if self.log:
-                print("do_click ElementNotInteractableException " + self.driver.current_url)
+                self.log_fun("do_click ElementNotInteractableException " + self.driver.current_url)
         except NoSuchElementException:
             if self.log:
-                print("do_click NoSuchElementException " + self.driver.current_url)
+                self.log_fun("do_click NoSuchElementException " + self.driver.current_url)
         except StaleElementReferenceException:
             if self.log:
-                print("do_click StaleElementReferenceException " + self.driver.current_url)
+                self.log_fun("do_click StaleElementReferenceException " + self.driver.current_url)
 
     def do_search(self, input: str):
         try:
@@ -127,32 +128,32 @@ class JuicyRunner(GUIRunner):
 
         def fill(name, value):
             if self.log:
-                print("FILL " + name + " " + value)
+                self.log_fun("FILL " + name + " " + value)
             
             self.do_fill(html.unescape(name), html.unescape(value))
 
         def check(name, state):
             if self.log:
-                print("CHECK " + name)
+                self.log_fun("CHECK " + name)
 
             self.do_check(html.unescape(name), state)
 
         def submit(name):
             if self.log:
-                print("SUBMIT " + name)
+                self.log_fun("SUBMIT " + name)
 
             if 'login' in self.driver.current_url:
                 self.do_submit(html.unescape(name))        
 
         def click(name):
             if self.log:
-                print("CLICK " + name)
+                self.log_fun("CLICK " + name)
             
             self.do_click(html.unescape(name))
 
         def search(input):
             if self.log:
-                print("SEARCH " + input)
+                self.log_fun("SEARCH " + input)
             
             self.do_search(input)
 

@@ -12,7 +12,7 @@ BROWSER = 'chrome'
 HEADLESS = False
 ITERATIONS = 10
 LOG = True
-XSS = False
+XSS = True
 
 def driver():
     if BROWSER == 'firefox':
@@ -49,16 +49,26 @@ def driver():
     return gui_driver
     
 
+FILENAME = "log.txt"
+
+def log(*args):
+    with open(FILENAME, "a") as f:
+        for text in args:
+            f.write(text + "\n")
+
 def main():
     print("Hello from psa2025-juice-shop-fuzzer!")
+
+    with open(FILENAME, "w") as f:
+        f.write("--LOG--\n")
 
     url = "http://localhost:3000/#/login"
     gui_driver = driver()
     gui_driver.get(url)
 
     gui_miner = JuicyGrammarMiner(gui_driver, XSS)
-    gui_fuzzer = JuicyFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=LOG)
-    gui_runner = JuicyRunner(gui_driver, log_gui_exploration=LOG)
+    gui_fuzzer = JuicyFuzzer(log, gui_driver, miner=gui_miner, log_gui_exploration=LOG)
+    gui_runner = JuicyRunner(log, gui_driver, log_gui_exploration=LOG)
 
     failed_runs = 0
     error_msgs = []
@@ -71,7 +81,7 @@ def main():
 
         for i in range(ITERATIONS):
             if LOG:
-                print("---iteration " + str(i))
+                log("---iteration " + str(i))
             
             try:
                 error_msg, result = gui_fuzzer.run(gui_runner)
@@ -80,11 +90,11 @@ def main():
             
             if result != gui_runner.PASS:
                 if LOG:
-                    print(error_msg)
+                    log(error_msg)
                 failed_runs += 1
                 error_msgs.append(error_msg)
 
-        print(f"{failed_runs} failed tests out of {ITERATIONS}\n{error_msgs}")
+        log(f"{failed_runs} failed tests out of {ITERATIONS}\n{error_msgs}")
 
     except ElementClickInterceptedException:
         print("ElementClickInterceptedException " + gui_driver.current_url)
