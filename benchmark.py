@@ -1,28 +1,23 @@
 import subprocess
 import sys
 
-def benchmark(num_runs: int, base_filename: str):
-    """
-    Runs main.py multiple times and generates indexed output files.
-    """
+def benchmark(N, max_expansions, filename):
+    output_filename = f"{filename}_benchmark.txt"
 
-    for i in range(1, num_runs + 1):
-        # Construct the output filename using the base name and index
-        output_filename = f"{base_filename}_{i}.txt"
+    with open(output_filename, "w") as output_file:
+        for i in range(1, N + 1):
 
-        # Run main.py as a subprocess and redirect its output to a file
-        with open(output_filename, "w") as output_file:
             subprocess.run(
-                [sys.executable, "main.py"],  # Use the current Python interpreter
-                stdout=output_file,           # Redirect standard output to file
-                stderr=subprocess.PIPE,       # Capture errors (optional but recommended)
-                text=True                     # Ensure text mode for output
+                [sys.executable, "main.py", str(i), max_expansions],
+                stdout=output_file,
+                stderr=subprocess.PIPE,
+                text=True
             )
 
+
 if __name__ == "__main__":
-    N = int(sys.argv[1]) # number of runs
+    n = int(sys.argv[1])         # number of times, main is run
+    max_expansions = sys.argv[2] # number of max iterations, the grammar is expanded
+    filename = sys.argv[3]       # filename
 
-    filename = sys.argv[2] # filename
-
-    # Execute main.py multiple times
-    benchmark(N, filename)
+    benchmark(n, max_expansions, filename)
