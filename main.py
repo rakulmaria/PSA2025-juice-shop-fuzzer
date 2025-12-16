@@ -5,13 +5,14 @@ from selenium.common.exceptions import ElementClickInterceptedException, Element
 from JuicyGrammarMiner import JuicyGrammarMiner
 from JuicyRunner import JuicyRunner
 from JuicyFuzzer import JuicyFuzzer
+import pprint
 
 import shutil
 
 BROWSER = 'chrome'
-HEADLESS = False
-ITERATIONS = 10
-LOG = True
+HEADLESS = True
+ITERATIONS = 200
+LOG = False
 XSS = False
 
 def driver():
@@ -68,10 +69,21 @@ def main():
             gui_fuzzer.explore_all(gui_runner)
         except NoSuchElementException:
             pass
+        
+        print("----- before iterations -------")
+        # pprint.pprint(gui_fuzzer.missing_expansion_coverage())
+        fsm_diagram(gui_fuzzer.grammar)
 
         for i in range(ITERATIONS):
             if LOG:
                 print("---iteration " + str(i))
+
+            missing_expansion_set = gui_fuzzer.missing_expansion_coverage()
+            
+            # if set is empty, the whole grammar was expanded
+            if not bool(missing_expansion_set):
+                print(f"--- set is empty, breaking: {i} ---")
+                break
             
             try:
                 error_msg, result = gui_fuzzer.run(gui_runner)
@@ -83,6 +95,11 @@ def main():
                     print(error_msg)
                 failed_runs += 1
                 error_msgs.append(error_msg)
+
+
+        print("----- after iterations -------")
+
+        fsm_diagram(gui_fuzzer.grammar)
 
         print(f"{failed_runs} failed tests out of {ITERATIONS}\n{error_msgs}")
 
@@ -96,6 +113,7 @@ def main():
         print("StaleElementException " + gui_driver.current_url)
 
     #print(fsm_diagram(gui_fuzzer.grammar))
+    
 
 
 if __name__ == "__main__":

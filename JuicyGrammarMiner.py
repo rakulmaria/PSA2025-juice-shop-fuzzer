@@ -110,7 +110,7 @@ SQLI_GRAMMAR: Grammar = ({
 
         
         "<email>": ["<string>@<string>.<string>",
-                    ("<string>@<string>.<string><sqli>", opts(prob=0.7))], # enforce a SQLi payload in email generation 60% of the time
+                    ("<string>@<string>.<string><sqli>", opts(prob=1.0))], # enforce a SQLi payload in email generation 60% of the time
 
         "<sqli>": [("<tautologies>", opts(prob=0.3)),
                     ("<union>", opts(prob=0.2)), 
