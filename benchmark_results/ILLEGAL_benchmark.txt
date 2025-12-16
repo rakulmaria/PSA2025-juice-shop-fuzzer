@@ -1,0 +1,125 @@
+
+==================================================
+                 ITERATION NO. 1                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 17 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 14 / 17
+
+ Errors discovered:
+   Unique / Total: 1 / 14
+   {'[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       44.2663 s
+   Time after exploration:   37.0982 s
+   Average per iteration:    2.1822 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 2                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 18 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 12 / 18
+
+ Errors discovered:
+   Unique / Total: 1 / 12
+   {'[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       42.1383 s
+   Time after exploration:   39.1936 s
+   Average per iteration:    2.1774 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 3                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 18 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 15 / 18
+
+ Errors discovered:
+   Unique / Total: 1 / 15
+   {'[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       42.1257 s
+   Time after exploration:   39.2011 s
+   Average per iteration:    2.1778 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 4                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 18 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 13 / 18
+
+ Errors discovered:
+   Unique / Total: 1 / 13
+   {'[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       42.2360 s
+   Time after exploration:   39.1644 s
+   Average per iteration:    2.1758 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 5                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 17 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 12 / 17
+
+ Errors discovered:
+   Unique / Total: 1 / 12
+   {'[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       44.1370 s
+   Time after exploration:   37.0409 s
+   Average per iteration:    2.1789 s
+
+==================================================
+

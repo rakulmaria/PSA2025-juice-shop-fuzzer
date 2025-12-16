@@ -1,0 +1,125 @@
+
+==================================================
+                 ITERATION NO. 1                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 12 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 12
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       33.2067 s
+   Time after exploration:   26.0680 s
+   Average per iteration:    2.1723 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 2                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 11 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 11
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       31.0651 s
+   Time after exploration:   23.9830 s
+   Average per iteration:    2.1803 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 3                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 13 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 13
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       31.2058 s
+   Time after exploration:   28.2552 s
+   Average per iteration:    2.1735 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 4                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 12 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 12
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       33.1587 s
+   Time after exploration:   26.1291 s
+   Average per iteration:    2.1774 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 5                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 11 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 11
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       31.0309 s
+   Time after exploration:   23.9672 s
+   Average per iteration:    2.1788 s
+
+==================================================
+

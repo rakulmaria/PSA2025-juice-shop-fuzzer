@@ -1,0 +1,30 @@
+
+==================================================
+                 ITERATION NO. 1                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+        Found the two errors at: 6 iterations.    
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 5 / 6
+
+ Errors discovered:
+   Unique / Total: 2 / 5
+   {'logged in', '[object Object]'}
+   ['logged in', 'logged in', 'logged in', 'logged in', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       26.2938 s
+   Time after exploration:   23.2787 s
+   Average per iteration:    3.8798 s
+
+==================================================
+
+
+ Final timing information:
+   Total elapsed time for full test-suite:       26.6602 s
+
+==================================================

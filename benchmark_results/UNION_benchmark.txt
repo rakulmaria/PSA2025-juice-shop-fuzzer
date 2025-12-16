@@ -1,0 +1,125 @@
+
+==================================================
+                 ITERATION NO. 1                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 17 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 17 / 17
+
+ Errors discovered:
+   Unique / Total: 2 / 17
+   {'logged in', '[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       42.1802 s
+   Time after exploration:   39.0960 s
+   Average per iteration:    2.2998 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 2                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 18 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 18 / 18
+
+ Errors discovered:
+   Unique / Total: 2 / 18
+   {'logged in', '[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       44.2132 s
+   Time after exploration:   41.2485 s
+   Average per iteration:    2.2916 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 3                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 19 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 19 / 19
+
+ Errors discovered:
+   Unique / Total: 2 / 19
+   {'[object Object]', 'logged in'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       54.6144 s
+   Time after exploration:   43.5823 s
+   Average per iteration:    2.2938 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 4                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 18 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 17 / 18
+
+ Errors discovered:
+   Unique / Total: 2 / 17
+   {'logged in', '[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       50.1803 s
+   Time after exploration:   43.1754 s
+   Average per iteration:    2.3986 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 5                  
+--------------------------------------------------
+                     BREAKING                     
+--------------------------------------------------
+   Expanded whole grammer at: 18 / 75.
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 18 / 18
+
+ Errors discovered:
+   Unique / Total: 1 / 18
+   {'[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       46.2848 s
+   Time after exploration:   39.2103 s
+   Average per iteration:    2.1784 s
+
+==================================================
+

@@ -1,0 +1,215 @@
+
+==================================================
+                 ITERATION NO. 1                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 30
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       66.8739 s
+   Time after exploration:   63.7205 s
+   Average per iteration:    2.1240 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 2                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 30
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       67.0187 s
+   Time after exploration:   64.0201 s
+   Average per iteration:    2.1340 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 3                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 30
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       67.8531 s
+   Time after exploration:   64.8434 s
+   Average per iteration:    2.1614 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 4                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 30
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       66.8902 s
+   Time after exploration:   63.8861 s
+   Average per iteration:    2.1295 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 5                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 30
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       71.4134 s
+   Time after exploration:   64.3140 s
+   Average per iteration:    2.1438 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 6                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 30
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       67.6148 s
+   Time after exploration:   64.5808 s
+   Average per iteration:    2.1527 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 7                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 30
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       71.4625 s
+   Time after exploration:   64.3031 s
+   Average per iteration:    2.1434 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 8                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 30
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       71.7538 s
+   Time after exploration:   64.5873 s
+   Average per iteration:    2.1529 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 9                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 30
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       67.0955 s
+   Time after exploration:   64.0695 s
+   Average per iteration:    2.1356 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 10                 
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 0 / 30
+
+ Errors discovered:
+   Unique / Total: 0 / 0
+   set()
+   []
+
+ Timing Information:
+   Total elapsed time:       67.6847 s
+   Time after exploration:   64.5972 s
+   Average per iteration:    2.1532 s
+
+==================================================
+
+
+ Full test-suite timing:
+   Total elapsed time:       689.3295 s
+
+==================================================
