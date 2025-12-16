@@ -1,3 +1,4 @@
+import sys
 from fuzzingbook.GUIFuzzer import fsm_diagram
 from selenium import webdriver
 from selenium.common.exceptions import ElementClickInterceptedException, ElementNotInteractableException, NoSuchElementException, StaleElementReferenceException
@@ -12,7 +13,10 @@ import time
 
 BROWSER = 'chrome'
 HEADLESS = True
-ITERATIONS = 200
+# CURRENT_i = int(sys.argv[1])
+# ITERATIONS = int(sys.argv[2])
+ITERATION = int(sys.argv[1])
+MAX_EXPANSION = int(sys.argv[2])
 LOG = False
 XSS = False
 
@@ -49,29 +53,48 @@ def driver():
         assert False, "Select 'firefox' or 'chrome' as browser"
 
     return gui_driver
+
+
+# def print_results(start, mid, end, failed_runs, error_msgs):
+#     print("\n--RESULTS--")
+#     print(f"{failed_runs} failed tests out of {TOTAL}")
+#     print(error_msgs)
+#     print(f"elapsed time: {end-start} ms")
+#     print(f"time after exploration: {end-mid} ms")
+#     print(f"average per iteration: {(end-mid)/TOTAL} ms\n")
+
+def print_results(start, mid, end, failed_runs, error_msgs):
+    print("RESULTS".center(50))
+    print("=" * 50)
     
-
-FILENAME = "log.txt"
-
-def log(*args):
-    with open(FILENAME, "a") as f:
-        for text in args:
-            f.write(text + "\n")
+    print(f"\n Test Summary:")
+    print(f"   Failed: {failed_runs} / {MAX_EXPANSION}")
+    
+    print(f"\n Errors discovered:")
+    print(f"   Unique / Total: {len(set(error_msgs))} / {len(error_msgs)}")
+    print(f"   {set(error_msgs)}")
+    print(f"   {error_msgs}")
+    
+    print(f"\n Timing Information:")
+    print(f"   Total elapsed time:       {end-start:.4f} ms")
+    print(f"   Time after exploration:   {end-mid:.4f} ms")
+    print(f"   Average per iteration:    {(end-mid)/MAX_EXPANSION:.4f} ms")
+    
+    print("\n" + "=" * 50 + "\n")
 
 def main():
-    print("Hello from psa2025-juice-shop-fuzzer!")
+    print("\n" + "=" * 50)
+    print(f"ITERATION NO. {ITERATION}".center(50))
+    
     start = time.time()
-
-    with open(FILENAME, "w") as f:
-        f.write("--LOG--\n")
 
     url = "http://localhost:3000/#/login"
     gui_driver = driver()
     gui_driver.get(url)
 
     gui_miner = JuicyGrammarMiner(gui_driver, XSS)
-    gui_fuzzer = JuicyFuzzer(log, gui_driver, miner=gui_miner, log_gui_exploration=LOG)
-    gui_runner = JuicyRunner(log, gui_driver, log_gui_exploration=LOG)
+    gui_fuzzer = JuicyFuzzer(gui_driver, miner=gui_miner, log_gui_exploration=LOG)
+    gui_runner = JuicyRunner(gui_driver, log_gui_exploration=LOG)
 
     failed_runs = 0
     error_msgs = []
@@ -81,23 +104,21 @@ def main():
             gui_fuzzer.explore_all(gui_runner)
         except NoSuchElementException:
             pass
-        
-        print("----- before iterations -------")
-        # pprint.pprint(gui_fuzzer.missing_expansion_coverage())
-        pprint.print(gui_fuzzer.covered_expansions)
-        fsm_diagram(gui_fuzzer.grammar)
 
         mid = time.time()
 
-        for i in range(ITERATIONS):
+        for i in range(MAX_EXPANSION):
             if LOG:
                 print("---iteration " + str(i))
 
             missing_expansion_set = gui_fuzzer.missing_expansion_coverage()
             
-            # if set is empty, the whole grammar was expanded
+            # if set is empty, the whole grammar was expanded and we break
             if not bool(missing_expansion_set):
-                print(f"--- set is empty, breaking: {i} ---")
+                print("--" * 50)
+                print("BREAKING".center(50))
+                print("--" * 50)
+                print(f"   Expanded whole grammer at: {i} / {MAX_EXPANSION}.")
                 break
             
             try:
@@ -107,18 +128,13 @@ def main():
             
             if result != gui_runner.PASS:
                 if LOG:
-                    log(error_msg)
+                    print(error_msg) 
                 failed_runs += 1
                 error_msgs.append(error_msg)
 
-    
-        print("----- after iterations -------")
-        pprint.pprint(gui_fuzzer.missing_expansion_coverage())
-        fsm_diagram(gui_fuzzer.grammar)
-
         end = time.time()
-        log("\n--RESULTS--",f"{failed_runs} failed tests out of {ITERATIONS}\n{error_msgs}")
-        log(f"elapsed time: {end-start} ms", f"time after exploration: {end-mid} ms", f"average per iteration: {(end-mid)/ITERATIONS} ms")
+        print_results(start, mid, end, failed_runs, error_msgs)
+
 
     except ElementClickInterceptedException:
         print("ElementClickInterceptedException " + gui_driver.current_url)
