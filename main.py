@@ -102,16 +102,17 @@ def main():
             if LOG:
                 print("---iteration " + str(i))
 
-            missing_expansion_set = gui_fuzzer.missing_expansion_coverage()
+            # missing_expansion_set = gui_fuzzer.missing_expansion_coverage()
+            # pprint.pprint(missing_expansion_set)
             
             # if set is empty, the whole grammar was expanded and we break
-            if not bool(missing_expansion_set):
-                print("-" * 50)
-                print("BREAKING".center(50))
-                print("-" * 50)
-                print(f"   Expanded whole grammer at: {i} iterations.".center(50))
-                expanded = i
-                break
+            # if not bool(missing_expansion_set):
+            #     print("-" * 50)
+            #     print("BREAKING".center(50))
+            #     print("-" * 50)
+            #     print(f"   Expanded whole grammer at: {i} iterations.".center(50))
+            #     expanded = i
+            #     break
             
             try:
                 error_msg, result = gui_fuzzer.run(gui_runner)
@@ -123,15 +124,6 @@ def main():
                     print(error_msg) 
                 failed_runs += 1
                 error_msgs.append(error_msg)
-
-            # if the login and object error was found, we break
-            if len(set(error_msgs)) == 2:
-                print("-" * 50)
-                print("BREAKING".center(50))
-                print("-" * 50)
-                print(f"    Found the two errors at: {i} iterations.".center(50))
-                expanded = i
-                break
 
         end = time.time()
         if expanded == -1:
