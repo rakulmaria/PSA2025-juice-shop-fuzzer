@@ -13,8 +13,6 @@ import time
 
 BROWSER = 'chrome'
 HEADLESS = True
-# CURRENT_i = int(sys.argv[1])
-# ITERATIONS = int(sys.argv[2])
 ITERATION = int(sys.argv[1])
 MAX_EXPANSION = int(sys.argv[2])
 LOG = False
@@ -54,21 +52,12 @@ def driver():
 
     return gui_driver
 
-
-# def print_results(start, mid, end, failed_runs, error_msgs):
-#     print("\n--RESULTS--")
-#     print(f"{failed_runs} failed tests out of {TOTAL}")
-#     print(error_msgs)
-#     print(f"elapsed time: {end-start} ms")
-#     print(f"time after exploration: {end-mid} ms")
-#     print(f"average per iteration: {(end-mid)/TOTAL} ms\n")
-
-def print_results(start, mid, end, failed_runs, error_msgs):
+def print_results(start, mid, end, failed_runs, error_msgs, expanded):
     print("RESULTS".center(50))
     print("=" * 50)
     
     print(f"\n Test Summary:")
-    print(f"   Failed: {failed_runs} / {MAX_EXPANSION}")
+    print(f"   Failed: {failed_runs} / {expanded}")
     
     print(f"\n Errors discovered:")
     print(f"   Unique / Total: {len(set(error_msgs))} / {len(error_msgs)}")
@@ -76,9 +65,9 @@ def print_results(start, mid, end, failed_runs, error_msgs):
     print(f"   {error_msgs}")
     
     print(f"\n Timing Information:")
-    print(f"   Total elapsed time:       {end-start:.4f} ms")
-    print(f"   Time after exploration:   {end-mid:.4f} ms")
-    print(f"   Average per iteration:    {(end-mid)/MAX_EXPANSION:.4f} ms")
+    print(f"   Total elapsed time:       {end-start:.4f} s")
+    print(f"   Time after exploration:   {end-mid:.4f} s")
+    print(f"   Average per iteration:    {(end-mid)/expanded:.4f} s")
     
     print("\n" + "=" * 50 + "\n")
 
@@ -99,6 +88,8 @@ def main():
     failed_runs = 0
     error_msgs = []
 
+    expanded = -1
+
     try:
         try:
             gui_fuzzer.explore_all(gui_runner)
@@ -107,7 +98,7 @@ def main():
 
         mid = time.time()
 
-        for i in range(MAX_EXPANSION):
+        for i in range(1, MAX_EXPANSION+1):
             if LOG:
                 print("---iteration " + str(i))
 
@@ -115,10 +106,11 @@ def main():
             
             # if set is empty, the whole grammar was expanded and we break
             if not bool(missing_expansion_set):
-                print("--" * 50)
+                print("-" * 50)
                 print("BREAKING".center(50))
-                print("--" * 50)
-                print(f"   Expanded whole grammer at: {i} / {MAX_EXPANSION}.")
+                print("-" * 50)
+                print(f"   Expanded whole grammer at: {i} iterations.".center(50))
+                expanded = i
                 break
             
             try:
@@ -132,8 +124,19 @@ def main():
                 failed_runs += 1
                 error_msgs.append(error_msg)
 
+            # if the login and object error was found, we break
+            if len(set(error_msgs)) == 2:
+                print("-" * 50)
+                print("BREAKING".center(50))
+                print("-" * 50)
+                print(f"    Found the two errors at: {i} iterations.".center(50))
+                expanded = i
+                break
+
         end = time.time()
-        print_results(start, mid, end, failed_runs, error_msgs)
+        if expanded == -1:
+            expanded = MAX_EXPANSION
+        print_results(start, mid, end, failed_runs, error_msgs, expanded)
 
 
     except ElementClickInterceptedException:
@@ -147,7 +150,5 @@ def main():
 
     #print(fsm_diagram(gui_fuzzer.grammar))
     
-
-
 if __name__ == "__main__":
     main()

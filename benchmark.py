@@ -23,9 +23,6 @@ def benchmark(N, max_expansions, filename):
         output_file.write(f"   Total elapsed time:       {end-start:.4f} s\n")
         output_file.write("\n" + "=" * 50 + "\n")
 
-
-
-
 if __name__ == "__main__":
     n = int(sys.argv[1])         # number of times, main is run
     max_expansions = sys.argv[2] # number of max iterations, the grammar is expanded

@@ -74,13 +74,13 @@ SQLI_GRAMMAR: Grammar = ({
         "<hidden>": ["<string>"],
 
         
-        "<email>": [#"<string>@<string>.<string>",
-                    "<string>@<string>.<string><sqli>"], # enforce a SQLi payload in email generation 60% of the time
+        "<email>": [# "<string>@<string>.<string>"],
+                     "<string>@<string>.<string><sqli>"], # enforce a SQLi payload in email generation 60% of the time
 
-        "<sqli>": [("<tautologies>", opts(prob=0.3)),
-                    ("<union>", opts(prob=0.2)), 
-                    ("<piggy-backed>", opts(prob=0.2)), 
-                    ("<illegal>", opts(prob=0.3))],
+        "<sqli>": [("<tautologies>", opts(prob=0.33)),
+                   ("<union>", opts(prob=0.33)), 
+                   ("<piggy-backed>", opts(prob=0.0)), 
+                   ("<illegal>", opts(prob=0.33))],
         
         "<tautologies>": [
             "\\' OR \\'1\\'=\\'1",
@@ -248,8 +248,8 @@ SQLI_GRAMMAR: Grammar = ({
 
 
 class JuicyGrammarMiner(GUIGrammarMiner):
-    # GUI_GRAMMAR = BETTER_GUI_GRAMMAR
-    GUI_GRAMMAR = SQLI_GRAMMAR
+    GUI_GRAMMAR = BETTER_GUI_GRAMMAR
+    # GUI_GRAMMAR = SQLI_GRAMMAR
 
     def __init__(self, driver, XSS):
         self.XSS = XSS
