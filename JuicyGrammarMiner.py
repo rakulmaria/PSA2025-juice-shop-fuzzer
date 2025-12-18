@@ -13,7 +13,7 @@ START_STATE = "<state>"
 UNEXPLORED_STATE = "<unexplored>"
 FINAL_STATE = "<end>"
 
-BETTER_GUI_GRAMMAR: Grammar = ({
+GUI_GRAMMAR: Grammar = ({
         START_SYMBOL: [START_STATE],
         UNEXPLORED_STATE: [""],
         FINAL_STATE: [""],
@@ -77,10 +77,10 @@ SQLI_GRAMMAR: Grammar = ({
         "<email>": [# "<string>@<string>.<string>"],
                      "<string>@<string>.<string><sqli>"], # enforce a SQLi payload in email generation 60% of the time
 
-        "<sqli>": [("<tautologies>", opts(prob=0.33)),
-                   ("<union>", opts(prob=0.33)), 
-                   ("<piggy-backed>", opts(prob=0.0)), 
-                   ("<illegal>", opts(prob=0.33))],
+        "<sqli>": [("<tautologies>", opts(prob=0.3)),
+                ("<union>", opts(prob=0.5)),
+                ("<piggy-backed>", opts(prob=0.0)),
+                ("<illegal>", opts(prob=0.2))],
         
         "<tautologies>": [
             "\\' OR \\'1\\'=\\'1",
@@ -248,7 +248,7 @@ SQLI_GRAMMAR: Grammar = ({
 
 
 class JuicyGrammarMiner(GUIGrammarMiner):
-    # GUI_GRAMMAR = BETTER_GUI_GRAMMAR
+    # GUI_GRAMMAR = GUI_GRAMMAR
     GUI_GRAMMAR = SQLI_GRAMMAR
 
     def __init__(self, driver, XSS):

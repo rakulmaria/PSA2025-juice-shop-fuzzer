@@ -1,0 +1,215 @@
+
+==================================================
+                 ITERATION NO. 1                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 23 / 30
+
+ Errors discovered:
+   Unique / Total: 2 / 23
+   {'logged in', '[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       84.7697 s
+   Time after exploration:   73.6094 s
+   Average per iteration:    2.4536 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 2                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 21 / 30
+
+ Errors discovered:
+   Unique / Total: 2 / 21
+   {'logged in', '[object Object]'}
+   ['[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', 'logged in']
+
+ Timing Information:
+   Total elapsed time:       80.5954 s
+   Time after exploration:   73.4491 s
+   Average per iteration:    2.4483 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 3                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 21 / 30
+
+ Errors discovered:
+   Unique / Total: 2 / 21
+   {'logged in', '[object Object]'}
+   ['[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', 'logged in', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       78.5910 s
+   Time after exploration:   75.5357 s
+   Average per iteration:    2.5179 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 4                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 25 / 30
+
+ Errors discovered:
+   Unique / Total: 2 / 25
+   {'[object Object]', 'logged in'}
+   ['logged in', '[object Object]', 'logged in', 'logged in', '[object Object]', '[object Object]', 'logged in', 'logged in', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in']
+
+ Timing Information:
+   Total elapsed time:       86.8978 s
+   Time after exploration:   79.7123 s
+   Average per iteration:    2.6571 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 5                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 20 / 30
+
+ Errors discovered:
+   Unique / Total: 2 / 20
+   {'[object Object]', 'logged in'}
+   ['logged in', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', 'logged in', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       80.9073 s
+   Time after exploration:   73.7436 s
+   Average per iteration:    2.4581 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 6                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 20 / 30
+
+ Errors discovered:
+   Unique / Total: 2 / 20
+   {'[object Object]', 'logged in'}
+   ['logged in', 'logged in', 'logged in', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       84.9418 s
+   Time after exploration:   77.7755 s
+   Average per iteration:    2.5925 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 7                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 24 / 30
+
+ Errors discovered:
+   Unique / Total: 2 / 24
+   {'logged in', '[object Object]'}
+   ['[object Object]', '[object Object]', 'logged in', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', 'logged in', '[object Object]', 'logged in', '[object Object]', '[object Object]', 'logged in', 'logged in', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       86.9141 s
+   Time after exploration:   79.7111 s
+   Average per iteration:    2.6570 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 8                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 24 / 30
+
+ Errors discovered:
+   Unique / Total: 2 / 24
+   {'logged in', '[object Object]'}
+   ['[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       76.7551 s
+   Time after exploration:   73.6656 s
+   Average per iteration:    2.4555 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 9                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 23 / 30
+
+ Errors discovered:
+   Unique / Total: 2 / 23
+   {'[object Object]', 'logged in'}
+   ['[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in']
+
+ Timing Information:
+   Total elapsed time:       78.5658 s
+   Time after exploration:   75.4719 s
+   Average per iteration:    2.5157 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 10                 
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 21 / 30
+
+ Errors discovered:
+   Unique / Total: 2 / 21
+   {'logged in', '[object Object]'}
+   ['[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', 'logged in', '[object Object]', '[object Object]', 'logged in', '[object Object]', '[object Object]', '[object Object]', '[object Object]', 'logged in', 'logged in', 'logged in', '[object Object]', '[object Object]']
+
+ Timing Information:
+   Total elapsed time:       82.6220 s
+   Time after exploration:   79.6118 s
+   Average per iteration:    2.6537 s
+
+==================================================
+
+
+ Full test-suite timing:
+   Total elapsed time:       825.9998 s
+
+==================================================
