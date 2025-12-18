@@ -15,7 +15,7 @@ HEADLESS = True
 ITERATION = int(sys.argv[1])
 MAX_EXPANSION = int(sys.argv[2])
 LOG = False
-XSS = True
+XSS = False
 
 def driver():
     if BROWSER == 'firefox':
