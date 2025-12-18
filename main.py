@@ -16,7 +16,7 @@ HEADLESS = True
 ITERATION = int(sys.argv[1])
 MAX_EXPANSION = int(sys.argv[2])
 LOG = False
-XSS = False
+XSS = True
 
 def driver():
     if BROWSER == 'firefox':
@@ -88,8 +88,6 @@ def main():
     failed_runs = 0
     error_msgs = []
 
-    expanded = -1
-
     try:
         try:
             gui_fuzzer.explore_all(gui_runner)
@@ -102,18 +100,6 @@ def main():
             if LOG:
                 print("---iteration " + str(i))
 
-            # missing_expansion_set = gui_fuzzer.missing_expansion_coverage()
-            # pprint.pprint(missing_expansion_set)
-            
-            # if set is empty, the whole grammar was expanded and we break
-            # if not bool(missing_expansion_set):
-            #     print("-" * 50)
-            #     print("BREAKING".center(50))
-            #     print("-" * 50)
-            #     print(f"   Expanded whole grammer at: {i} iterations.".center(50))
-            #     expanded = i
-            #     break
-            
             try:
                 error_msg, result = gui_fuzzer.run(gui_runner)
             except NoSuchElementException:
@@ -126,9 +112,8 @@ def main():
                 error_msgs.append(error_msg)
 
         end = time.time()
-        if expanded == -1:
-            expanded = MAX_EXPANSION
-        print_results(start, mid, end, failed_runs, error_msgs, expanded)
+
+        print_results(start, mid, end, failed_runs, error_msgs, MAX_EXPANSION)
 
 
     except ElementClickInterceptedException:

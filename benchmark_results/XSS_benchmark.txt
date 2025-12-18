@@ -1,0 +1,215 @@
+
+==================================================
+                 ITERATION NO. 1                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 6 / 15
+
+ Errors discovered:
+   Unique / Total: 2 / 6
+   {'XSS-soundcloud', 'XSS-alert'}
+   ['XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-alert']
+
+ Timing Information:
+   Total elapsed time:       134.9192 s
+   Time after exploration:   123.4720 s
+   Average per iteration:    8.2315 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 2                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 9 / 15
+
+ Errors discovered:
+   Unique / Total: 2 / 9
+   {'XSS-alert', 'XSS-soundcloud'}
+   ['XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-alert', 'XSS-alert', 'XSS-alert', 'XSS-alert', 'XSS-soundcloud', 'XSS-alert']
+
+ Timing Information:
+   Total elapsed time:       192.8921 s
+   Time after exploration:   189.6358 s
+   Average per iteration:    12.6424 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 3                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 11 / 15
+
+ Errors discovered:
+   Unique / Total: 2 / 11
+   {'XSS-soundcloud', 'XSS-alert'}
+   ['XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-alert', 'XSS-alert', 'XSS-alert']
+
+ Timing Information:
+   Total elapsed time:       236.4840 s
+   Time after exploration:   226.8334 s
+   Average per iteration:    15.1222 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 4                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 5 / 15
+
+ Errors discovered:
+   Unique / Total: 2 / 5
+   {'XSS-alert', 'XSS-soundcloud'}
+   ['XSS-soundcloud', 'XSS-alert', 'XSS-alert', 'XSS-alert', 'XSS-alert']
+
+ Timing Information:
+   Total elapsed time:       195.4178 s
+   Time after exploration:   185.6478 s
+   Average per iteration:    12.3765 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 5                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 9 / 15
+
+ Errors discovered:
+   Unique / Total: 2 / 9
+   {'XSS-alert', 'XSS-soundcloud'}
+   ['XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-soundcloud', 'XSS-alert']
+
+ Timing Information:
+   Total elapsed time:       164.0507 s
+   Time after exploration:   152.6588 s
+   Average per iteration:    10.1773 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 6                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 8 / 15
+
+ Errors discovered:
+   Unique / Total: 2 / 8
+   {'XSS-alert', 'XSS-soundcloud'}
+   ['XSS-alert', 'XSS-soundcloud', 'XSS-soundcloud', 'XSS-alert', 'XSS-alert', 'XSS-alert', 'XSS-soundcloud', 'XSS-alert']
+
+ Timing Information:
+   Total elapsed time:       318.4415 s
+   Time after exploration:   315.3171 s
+   Average per iteration:    21.0211 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 7                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 6 / 15
+
+ Errors discovered:
+   Unique / Total: 2 / 6
+   {'XSS-soundcloud', 'XSS-alert'}
+   ['XSS-alert', 'XSS-alert', 'XSS-alert', 'XSS-soundcloud', 'XSS-soundcloud', 'XSS-alert']
+
+ Timing Information:
+   Total elapsed time:       149.5190 s
+   Time after exploration:   146.2952 s
+   Average per iteration:    9.7530 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 8                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 10 / 15
+
+ Errors discovered:
+   Unique / Total: 2 / 10
+   {'XSS-alert', 'XSS-soundcloud'}
+   ['XSS-alert', 'XSS-alert', 'XSS-alert', 'XSS-soundcloud', 'XSS-soundcloud', 'XSS-soundcloud', 'XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-alert']
+
+ Timing Information:
+   Total elapsed time:       294.6452 s
+   Time after exploration:   284.9339 s
+   Average per iteration:    18.9956 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 9                  
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 6 / 15
+
+ Errors discovered:
+   Unique / Total: 2 / 6
+   {'XSS-soundcloud', 'XSS-alert'}
+   ['XSS-soundcloud', 'XSS-alert', 'XSS-soundcloud', 'XSS-alert', 'XSS-alert', 'XSS-alert']
+
+ Timing Information:
+   Total elapsed time:       194.4886 s
+   Time after exploration:   192.8497 s
+   Average per iteration:    12.8566 s
+
+==================================================
+
+
+==================================================
+                 ITERATION NO. 10                 
+                     RESULTS                      
+==================================================
+
+ Test Summary:
+   Failed: 8 / 15
+
+ Errors discovered:
+   Unique / Total: 2 / 8
+   {'XSS-soundcloud', 'XSS-alert'}
+   ['XSS-alert', 'XSS-alert', 'XSS-alert', 'XSS-soundcloud', 'XSS-soundcloud', 'XSS-soundcloud', 'XSS-soundcloud', 'XSS-alert']
+
+ Timing Information:
+   Total elapsed time:       298.1635 s
+   Time after exploration:   295.1787 s
+   Average per iteration:    19.6786 s
+
+==================================================
+
+
+ Full test-suite timing:
+   Total elapsed time:       2270.3234 s
+
+==================================================
