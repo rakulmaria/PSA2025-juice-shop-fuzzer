@@ -12,7 +12,7 @@ uv sync
 
 ## About the project
 
-This project demonstrates a practical usage of a probability-gyuided grammar fuzzer. The goal was to evaluate the effects of applying probabilistic strategies to guide a grammar expansion during input generation. This was done by extending on the fuzzer created by the [Fuzzingbook](https://www.fuzzingbook.org). The fuzzer was implemented focusing on a specific SUT, namely the OWASP Juice Shop, which is an open-source insecure web application. By exploiting the vulnerabilities known from the website's Login page, we managed to create a structured grammar that inputs SQL injections to the page.
+This project demonstrates a practical usage of a probability-guided grammar fuzzer. The goal was to evaluate the effects of applying probabilistic strategies to guide a grammar expansion during input generation. This was done by extending on the fuzzer created by the [Fuzzingbook](https://www.fuzzingbook.org). The fuzzer was implemented focusing on a specific SUT, namely the OWASP Juice Shop, which is an open-source insecure web application. By exploiting the vulnerabilities known from the website's Login page, we managed to create a structured grammar that inputs SQL injections to the page.
 
 ## Running the Fuzzer
 
