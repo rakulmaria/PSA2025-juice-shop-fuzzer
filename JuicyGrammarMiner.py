@@ -41,7 +41,7 @@ GUI_GRAMMAR: Grammar = ({
         "<hidden>": ["<string>"],
     })
 
-SQLI_GRAMMAR: Grammar = ({
+SQLIA_GRAMMAR: Grammar = ({
         START_SYMBOL: [START_STATE],
         UNEXPLORED_STATE: [""],
         FINAL_STATE: [""],
@@ -74,7 +74,7 @@ SQLI_GRAMMAR: Grammar = ({
         "<hidden>": ["<string>"],
 
 
-        "<email>": ["<string>@<string>.<string><sqlia>"], # enforce a SQLi payload in email generation
+        "<email>": ["<string>@<string>.<string><sqlia>"], # enforce a SQLIA payload in email generation
         
         "<sqlia>": [("<tautologies>", opts(prob=0.3)),
                 ("<union>", opts(prob=0.5)),
@@ -248,7 +248,7 @@ SQLI_GRAMMAR: Grammar = ({
 
 class JuicyGrammarMiner(GUIGrammarMiner):
     # GUI_GRAMMAR = GUI_GRAMMAR
-    GUI_GRAMMAR = SQLI_GRAMMAR
+    GUI_GRAMMAR = SQLIA_GRAMMAR
 
     def __init__(self, driver, XSS):
         self.XSS = XSS
