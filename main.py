@@ -6,7 +6,6 @@ from selenium.common.exceptions import ElementClickInterceptedException, Element
 from JuicyGrammarMiner import JuicyGrammarMiner
 from JuicyRunner import JuicyRunner
 from JuicyFuzzer import JuicyFuzzer
-import pprint
 
 import shutil
 import time
